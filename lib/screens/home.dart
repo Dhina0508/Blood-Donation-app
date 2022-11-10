@@ -1,3 +1,4 @@
+import 'package:blood_donation/screens/blood/blood.dart';
 import 'package:blood_donation/screens/chat_screens/chat_lobby.dart';
 import 'package:blood_donation/screens/dimensions.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -130,7 +131,10 @@ class _HomeState extends State<Home> {
                         Icons.bloodtype,
                         color: Colors.red,
                       ),
-                      onTap: () => [Navigator.of(context).pushNamed('blood')],
+                      onTap: () => [
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => blood()))
+                      ],
                     ),
                   ),
                 ],

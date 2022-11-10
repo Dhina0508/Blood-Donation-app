@@ -1,44 +1,15 @@
-import 'package:blood_donation/screens/chat_screens/chatscreen.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-class bloodprof extends StatefulWidget {
+class AdminBloodProfile extends StatefulWidget {
   var value;
-  final count = '0';
-  bloodprof({this.value});
+
+  AdminBloodProfile({@required this.value});
 
   @override
-  State<bloodprof> createState() => _bloodprofState();
+  State<AdminBloodProfile> createState() => _AdminBloodProfileState();
 }
 
-class _bloodprofState extends State<bloodprof> {
-  // launchwp({@required number, @required name, @required bloodgroup}) async {
-  //   var url =
-  //       "https://api.whatsapp.com/send?phone=$number&text=I'm%20Willing%20To%20Donate%20$bloodgroup%20Blood%20Group";
-  //   if (await canLaunch(url)) {
-  //     await launch(url);
-  //   } else {
-  //     throw "cannot launch $url";
-  //   }
-  // }
-
-  var ChatRoomKey;
-
-  ChatRoomId({required number}) async {
-    var Email = FirebaseAuth.instance.currentUser!.email;
-    ChatRoomKey = "$number$Email";
-    print("chat room id: " + ChatRoomKey);
-  }
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    ChatRoomId(number: widget.value['PhoneNumber']);
-  }
-
+class _AdminBloodProfileState extends State<AdminBloodProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -104,54 +75,6 @@ class _bloodprofState extends State<bloodprof> {
                                 width: 15,
                               ),
                               Text(
-                                "UHID_Id : ",
-                                style: TextStyle(
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.w500,
-                                    fontFamily: 'JosefinSans',
-                                    color: Colors.brown),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(widget.value['UHID'],
-                              style: TextStyle(
-                                  fontSize: 25, fontWeight: FontWeight.bold)),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Row(
-                            children: [
-                              SizedBox(
-                                width: 15,
-                              ),
-                              Text(
-                                "Units Needed : ",
-                                style: TextStyle(
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.w500,
-                                    fontFamily: 'JosefinSans',
-                                    color: Colors.brown),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(widget.value['units'],
-                              style: TextStyle(
-                                  fontSize: 25, fontWeight: FontWeight.bold)),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Row(
-                            children: [
-                              SizedBox(
-                                width: 15,
-                              ),
-                              Text(
                                 'Blood Needed : ',
                                 style: TextStyle(
                                     fontSize: 25,
@@ -197,6 +120,32 @@ class _bloodprofState extends State<bloodprof> {
                           ),
                           SizedBox(
                             height: 20,
+                          ),
+                          Row(
+                            children: [
+                              SizedBox(
+                                width: 15,
+                              ),
+                              Text(
+                                ' Patient Address: ',
+                                style: TextStyle(
+                                    fontSize: 25,
+                                    fontFamily: 'JosefinSans',
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.brown),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 8.0, left: 15),
+                            child: Text(
+                              widget.value['Address'],
+                              style: TextStyle(
+                                  fontSize: 25, fontWeight: FontWeight.bold),
+                            ),
                           ),
                           SizedBox(
                             height: 20,
@@ -335,7 +284,20 @@ class _bloodprofState extends State<bloodprof> {
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: ElevatedButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    // launchwp(
+                                    //     number: ("+91" +
+                                    //         widget.value['PhoneNumber']),
+                                    //     bloodgroup:
+                                    //         (widget.value['Blood_Group']));
+                                    // String id = widget.value['id'];
+                                    // print(id);
+                                    // final docUser = FirebaseFirestore.instance
+                                    //     .collection("Common_Db")
+                                    //     .doc(id.toString());
+                                    // docUser.delete();
+                                    // Navigator.of(context).pop();
+                                  },
                                   child: Row(
                                     children: [
                                       Icon(
@@ -346,7 +308,7 @@ class _bloodprofState extends State<bloodprof> {
                                         width: 10,
                                       ),
                                       Text(
-                                        'Accept  ',
+                                        '   Chat   ',
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold,
@@ -361,9 +323,8 @@ class _bloodprofState extends State<bloodprof> {
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: ElevatedButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
+                                  onPressed: () =>
+                                      [Navigator.of(context).pop()],
                                   child: Row(
                                     children: [
                                       Icon(
@@ -374,7 +335,7 @@ class _bloodprofState extends State<bloodprof> {
                                         width: 10,
                                       ),
                                       Text(
-                                        'Remove',
+                                        'Decline',
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold,

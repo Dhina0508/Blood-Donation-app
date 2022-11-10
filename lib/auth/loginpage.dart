@@ -1,3 +1,4 @@
+import 'package:blood_donation/admin/adminDashboard.dart';
 import 'package:blood_donation/auth/forget_password/get_email.dart';
 import 'package:blood_donation/auth/phone_number_verification.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  String adminLog = "admin@email.com";
   bool _isHidden = true;
 
   TextEditingController emailcontroller = TextEditingController();
@@ -132,11 +134,19 @@ class _LoginPageState extends State<LoginPage> {
                             await SharedPreferences.getInstance();
                         if (emailcontroller.text.isNotEmpty &&
                             passwordcontroller.text.isNotEmpty) {
-                          service.loginUser(
-                              context,
-                              emailcontroller.text.trim(),
-                              passwordcontroller.text);
-                          pref.setString("email", emailcontroller.text.trim());
+                          if (emailcontroller.text == adminLog) {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => AdminDashboard()));
+                          } else {
+                            service.loginUser(
+                                context,
+                                emailcontroller.text.trim(),
+                                passwordcontroller.text);
+                            pref.setString(
+                                "email", emailcontroller.text.trim());
+                          }
                         } else {
                           service.errorBox(context,
                               "Fields must not empty ,please provide valid email and password");
