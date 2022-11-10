@@ -19,7 +19,7 @@ main() async {
         primarySwatch: Colors.blue,
       ),
       debugShowCheckedModeBanner: false,
-      home: MyHomePage()));
+      home: email == null ? MyHomePage() : BottomNavigatorBar()));
 }
 
 class MyHomePage extends StatefulWidget {

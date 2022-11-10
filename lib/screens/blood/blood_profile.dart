@@ -1,4 +1,3 @@
-import 'package:blood_donation/screens/chat_screens/chatscreen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -314,18 +313,6 @@ class _bloodprofState extends State<bloodprof> {
                                 padding: const EdgeInsets.all(8.0),
                                 child: ElevatedButton(
                                   onPressed: () {
-                                    ChatRoomId(
-                                        number: widget.value['PhoneNumber']);
-                                    print("Chatroom Key: " + ChatRoomKey);
-
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => chatScreen(
-                                                  chatroomid: ChatRoomKey,
-                                                  name:
-                                                      widget.value['Your_name'],
-                                                )));
                                     // launchwp(
                                     //     number: ("+91" +
                                     //         widget.value['PhoneNumber']),
@@ -349,7 +336,7 @@ class _bloodprofState extends State<bloodprof> {
                                         width: 10,
                                       ),
                                       Text(
-                                        '   Chat   ',
+                                        '  Donate   ',
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold,

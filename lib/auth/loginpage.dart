@@ -18,6 +18,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   bool _isHidden = true;
+  var visible = "";
 
   TextEditingController emailcontroller = TextEditingController();
   TextEditingController passwordcontroller = TextEditingController();
@@ -35,10 +36,10 @@ class _LoginPageState extends State<LoginPage> {
           width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
             gradient: LinearGradient(colors: [
-              Color.fromARGB(210, 223, 52, 52),
+              Color.fromARGB(210, 240, 23, 23),
               Color.fromARGB(210, 234, 161, 161),
-              Color.fromARGB(210, 234, 161, 161),
-              Color.fromARGB(210, 223, 52, 52),
+              Color.fromARGB(210, 211, 199, 199),
+              Color.fromARGB(210, 52, 47, 47),
             ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
           ),
         ),
@@ -100,13 +101,25 @@ class _LoginPageState extends State<LoginPage> {
                       decoration: InputDecoration(
                           fillColor: Colors.grey.shade100,
                           filled: true,
-                          suffixIcon: InkWell(
-                            onTap: _togglePasswordView,
-                            child: Icon(
-                              Icons.visibility,
-                              size: 25,
-                            ),
-                          ),
+                          suffixIcon: visible == ""
+                              ? InkWell(
+                                  onTap: () {
+                                    _togglePasswordView();
+                                    visible = "1";
+                                  },
+                                  child: Icon(
+                                    Icons.visibility_off,
+                                    size: 25,
+                                  ))
+                              : InkWell(
+                                  onTap: () {
+                                    _togglePasswordView();
+                                    visible = "";
+                                  },
+                                  child: Icon(
+                                    Icons.visibility,
+                                    size: 25,
+                                  )),
                           hintText: 'Enter Password',
                           hintStyle: TextStyle(color: Colors.black),
                           prefixIcon: Icon(

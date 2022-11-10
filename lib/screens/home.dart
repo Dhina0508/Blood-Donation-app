@@ -1,4 +1,4 @@
-import 'package:blood_donation/screens/chat_screens/chat_lobby.dart';
+import 'package:blood_donation/screens/blood/blood.dart';
 import 'package:blood_donation/screens/dimensions.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -24,21 +24,10 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Color.fromRGBO(248, 68, 100, 300),
       backgroundColor: Color.fromARGB(255, 202, 191, 191),
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.black),
-        actions: [
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => Lobby()));
-            },
-            child: Padding(
-                padding: const EdgeInsets.all(8.0), child: Icon(Icons.message)),
-          ),
-        ],
         elevation: 0,
         centerTitle: true,
         backgroundColor: Colors.transparent,
@@ -63,10 +52,7 @@ class _HomeState extends State<Home> {
           ),
         ),
       ),
-      body: Container(
-        color: Color.fromARGB(255, 194, 122, 117),
-      ),
-
+      body: Container(),
       drawer: FutureBuilder<DocumentSnapshot>(
           future: users.doc(FirebaseAuth.instance.currentUser!.email).get(),
           builder:
@@ -123,14 +109,33 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(left: 25),
+                    padding: EdgeInsets.only(left: 10),
                     child: ListTile(
                       title: Text('Blood Donation'),
                       leading: Icon(
                         Icons.bloodtype,
                         color: Colors.red,
                       ),
-                      onTap: () => [Navigator.of(context).pushNamed('blood')],
+                      onTap: () => [
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => blood()))
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10.0),
+                    child: ListTile(
+                      title: Text(
+                        'Log Out',
+                        style: TextStyle(color: Colors.black),
+                      ),
+                      leading: Icon(Icons.logout),
+                      onTap: () async {
+                        service.signOut(context);
+                        SharedPreferences pref =
+                            await SharedPreferences.getInstance();
+                        pref.remove("email");
+                      },
                     ),
                   ),
                 ],

@@ -1,5 +1,6 @@
 import 'package:blood_donation/bottomnavigation_bar/bottomnavigationbar.dart';
 import 'package:blood_donation/screens/blood/blood_profile.dart';
+import 'package:blood_donation/screens/blood/blood_register.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -33,7 +34,10 @@ class _profileState extends State<blood> {
         ),
         actions: [
           IconButton(
-              onPressed: () => [Navigator.of(context).pushNamed('bloodreg')],
+              onPressed: () => [
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => bloodreg()))
+                  ],
               icon: Icon(Icons.add))
         ],
       ),
