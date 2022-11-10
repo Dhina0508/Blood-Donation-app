@@ -1,24 +1,16 @@
-import 'package:blood_donation/bottomnavigation_bar/bottomnavigationbar.dart';
+import 'package:blood_donation/admin/adminBloodProfile.dart';
 import 'package:blood_donation/screens/blood/blood_profile.dart';
-import 'package:blood_donation/screens/blood/blood_register.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class blood extends StatefulWidget {
-  const blood({Key? key}) : super(key: key);
+class AdminDashboard extends StatelessWidget {
+  const AdminDashboard({super.key});
 
-  @override
-  State<blood> createState() => _profileState();
-}
-
-class _profileState extends State<blood> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Blood Requests'),
+        title: Text('Welcome Admin'),
         backgroundColor: Colors.red,
       ),
       body: Center(
@@ -35,7 +27,7 @@ class _profileState extends State<blood> {
                   itemCount: snapshot.data!.docs.length,
                   itemBuilder: (context, i) {
                     QueryDocumentSnapshot x = snapshot.data!.docs[i];
-                    if (x['user'] == "user") {
+                    if (x['user'] == "admin") {
                       return Card(
                         elevation: 5,
                         child: ListTile(
@@ -54,7 +46,7 @@ class _profileState extends State<blood> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => bloodprof(
+                                    builder: (context) => AdminBloodProfile(
                                         value: snapshot.data!.docs[i])))
                           ],
                         ),

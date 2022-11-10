@@ -1,4 +1,4 @@
-import 'package:blood_donation/admin/admin_Dashboard.dart';
+import 'package:blood_donation/admin/adminDashboard.dart';
 import 'package:blood_donation/auth/forget_password/get_email.dart';
 import 'package:blood_donation/auth/phone_number_verification.dart';
 import 'package:blood_donation/auth/register.dart';
@@ -17,6 +17,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  String adminLog = "admin@email.com";
   bool _isHidden = true;
   var visible = "";
 
@@ -149,7 +150,7 @@ class _LoginPageState extends State<LoginPage> {
                             await SharedPreferences.getInstance();
                         if (emailcontroller.text.isNotEmpty &&
                             passwordcontroller.text.isNotEmpty) {
-                          if (emailcontroller.text == AdminLogin) {
+                          if (emailcontroller.text == adminLog) {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(

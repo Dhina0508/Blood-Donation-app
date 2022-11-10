@@ -29,6 +29,8 @@ class _registerState extends State<bloodreg> {
 
   TextEditingController _YourNameController = TextEditingController();
   TextEditingController _datecontroller = TextEditingController();
+  TextEditingController _Unitcontroller = TextEditingController();
+  TextEditingController _UHIDcontorller = TextEditingController();
 
   // SendUserDataToDB() async {
   //   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -63,19 +65,22 @@ class _registerState extends State<bloodreg> {
     var currentuser = _auth.currentUser;
 
     final _CollectionReference =
-        FirebaseFirestore.instance.collection("Common_Db").doc();
+        FirebaseFirestore.instance.collection("Blood_Wait_list").doc();
     return _CollectionReference.set({
       "about": "blood",
       "id": _CollectionReference.id,
       "Name": _NameController.text,
       "Blood_Group": value == 'Others' ? _bloodController.text : value,
       "PhoneNumber": _PhoneNoController.text,
-      "Address": _AddressController.text,
       "hospital_name": _HospitalNameController.text,
+      "UHID": _UHIDcontorller.text,
       "hospital_address": _HospitalAddressController.text,
       "Your_name": _YourNameController.text,
       "discription": _DiscriptionController.text,
+      "user": "admin",
       "Date": _datecontroller.text,
+      "Status": "Pending....",
+      "units": _Unitcontroller.text,
       "Time": DateTime.now(),
       "admin": "admin@email.com"
     }).then((value) {
@@ -268,15 +273,15 @@ class _registerState extends State<bloodreg> {
                         padding:
                             const EdgeInsets.only(right: 8, top: 30, left: 8),
                         child: TextFormField(
-                          controller: _AddressController,
+                          controller: _UHIDcontorller,
                           decoration: InputDecoration(
-                              labelText: 'Patient Address',
+                              labelText: 'Patient UHID',
                               prefixIcon: Icon(
-                                Icons.house_rounded,
+                                Icons.panorama_fish_eye_outlined,
                                 color: Colors.redAccent[200],
                                 size: 40,
                               ),
-                              hintText: 'Your address'),
+                              hintText: 'UHID'),
                         ),
                       ),
                       Padding(
@@ -285,13 +290,28 @@ class _registerState extends State<bloodreg> {
                         child: TextFormField(
                           controller: _DiscriptionController,
                           decoration: InputDecoration(
-                              labelText: 'About patient',
+                              labelText: 'Reason for admission',
                               prefixIcon: Icon(
                                 Icons.bed_rounded,
                                 color: Colors.redAccent[200],
                                 size: 40,
                               ),
-                              hintText: 'About patient'),
+                              hintText: ''),
+                        ),
+                      ),
+                      Padding(
+                        padding:
+                            const EdgeInsets.only(right: 8, top: 30, left: 8),
+                        child: TextFormField(
+                          controller: _Unitcontroller,
+                          decoration: InputDecoration(
+                              labelText: 'Units needes',
+                              prefixIcon: Icon(
+                                Icons.shopping_bag_rounded,
+                                color: Colors.redAccent[200],
+                                size: 40,
+                              ),
+                              hintText: '5 units'),
                         ),
                       ),
                       Padding(
@@ -363,7 +383,12 @@ class _registerState extends State<bloodreg> {
                               if (_NameController.text != '' &&
                                   _PhoneNoController.text != '' &&
                                   _datecontroller != '' &&
-                                  _AddressController.text != '' &&
+                                  _UHIDcontorller.text != '' &&
+                                  _Unitcontroller.text != '' &&
+                                  _bloodController.text != '' &&
+                                  _HospitalNameController.text != '' &&
+                                  _HospitalAddressController.text != '' &&
+                                  _YourNameController.text != '' &&
                                   _DiscriptionController.text != '') {
                                 // SendUserDataToDB();
                                 CommonDb();
