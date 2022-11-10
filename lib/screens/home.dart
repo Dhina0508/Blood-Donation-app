@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 import '../firebase_helper/firebase_helper.dart';
 
@@ -52,7 +53,15 @@ class _HomeState extends State<Home> {
           ),
         ),
       ),
-      body: Container(),
+      body: Column(
+        children: [
+          Container()
+          //     child: Center(
+          //   child: 'hello'.text.xl4.bold.make().shimmer(
+          //       primaryColor: Vx.amber100, secondaryColor: Colors.green),
+          // )
+        ],
+      ),
       drawer: FutureBuilder<DocumentSnapshot>(
           future: users.doc(FirebaseAuth.instance.currentUser!.email).get(),
           builder:

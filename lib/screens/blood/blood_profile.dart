@@ -103,7 +103,7 @@ class _bloodprofState extends State<bloodprof> {
                                 width: 15,
                               ),
                               Text(
-                                "UHID_Id : ",
+                                "Patient UHID : ",
                                 style: TextStyle(
                                     fontSize: 25,
                                     fontWeight: FontWeight.w500,
@@ -127,7 +127,7 @@ class _bloodprofState extends State<bloodprof> {
                                 width: 15,
                               ),
                               Text(
-                                "Units Needed : ",
+                                "No of Units Needed : ",
                                 style: TextStyle(
                                     fontSize: 25,
                                     fontWeight: FontWeight.w500,
@@ -151,7 +151,7 @@ class _bloodprofState extends State<bloodprof> {
                                 width: 15,
                               ),
                               Text(
-                                'Blood Needed : ',
+                                'Blood Type Needed : ',
                                 style: TextStyle(
                                     fontSize: 25,
                                     fontFamily: 'JosefinSans',
@@ -206,7 +206,7 @@ class _bloodprofState extends State<bloodprof> {
                                 width: 15,
                               ),
                               Text(
-                                'About the person: ',
+                                'Reason for Admission: ',
                                 style: TextStyle(
                                     fontSize: 25,
                                     fontFamily: 'JosefinSans',
