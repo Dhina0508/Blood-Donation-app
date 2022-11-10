@@ -1,5 +1,8 @@
+import 'package:blood_donation/admin/admin_Dashboard.dart';
 import 'package:blood_donation/auth/forget_password/get_email.dart';
 import 'package:blood_donation/auth/phone_number_verification.dart';
+import 'package:blood_donation/auth/register.dart';
+import 'package:blood_donation/auth/signup.dart';
 import 'package:flutter/material.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
@@ -22,6 +25,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    String AdminLogin = "admin@email.com";
     // print(
     //   "the current width is" + MediaQuery.of(context).size.width.toString());
     return Scaffold(
@@ -132,11 +136,19 @@ class _LoginPageState extends State<LoginPage> {
                             await SharedPreferences.getInstance();
                         if (emailcontroller.text.isNotEmpty &&
                             passwordcontroller.text.isNotEmpty) {
-                          service.loginUser(
-                              context,
-                              emailcontroller.text.trim(),
-                              passwordcontroller.text);
-                          pref.setString("email", emailcontroller.text.trim());
+                          if (emailcontroller.text == AdminLogin) {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => AdminDashboard()));
+                          } else {
+                            service.loginUser(
+                                context,
+                                emailcontroller.text.trim(),
+                                passwordcontroller.text);
+                            pref.setString(
+                                "email", emailcontroller.text.trim());
+                          }
                         } else {
                           service.errorBox(context,
                               "Fields must not empty ,please provide valid email and password");
@@ -180,8 +192,7 @@ class _LoginPageState extends State<LoginPage> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) =>
-                                              PhoneNoVerification()));
+                                          builder: (context) => SignUp()));
                                 },
                                 child: Text(
                                   "Don't have an Account?   ",

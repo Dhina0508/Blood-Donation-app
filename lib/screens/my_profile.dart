@@ -254,7 +254,7 @@ class _MyProfileState extends State<MyProfile> {
                             child: CircleAvatar(
                               backgroundColor: Colors.white,
                               backgroundImage: file == null
-                                  ? AssetImage("images/profile1.png")
+                                  ? AssetImage("images/profile.png")
                                   : FileImage(File(file!.path))
                                       as ImageProvider,
                               radius: 50,

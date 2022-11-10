@@ -77,6 +77,7 @@ class _registerState extends State<bloodreg> {
       "discription": _DiscriptionController.text,
       "Date": _datecontroller.text,
       "Time": DateTime.now(),
+      "admin": "admin@email.com"
     }).then((value) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text("Details Of The User Has Been Added"),

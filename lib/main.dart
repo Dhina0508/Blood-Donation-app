@@ -15,12 +15,11 @@ main() async {
   SharedPreferences pref = await SharedPreferences.getInstance();
   var email = pref.getString('email');
   runApp(GetMaterialApp(
-    theme: ThemeData(
-      primarySwatch: Colors.blue,
-    ),
-    debugShowCheckedModeBanner: false,
-    home: email == null ? MyHomePage() : BottomNavigatorBar(),
-  ));
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      debugShowCheckedModeBanner: false,
+      home: MyHomePage()));
 }
 
 class MyHomePage extends StatefulWidget {

@@ -1,4 +1,5 @@
 import 'package:blood_donation/auth/loginpage.dart';
+import 'package:blood_donation/auth/register.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -151,8 +152,10 @@ class _SignUpState extends State<SignUp> {
                             .createUserWithEmailAndPassword(
                                 email: _Emailcontroller.text.trim(),
                                 password: _Passwordcontroller.text.trim())
-                            .then((value) =>
-                                Navigator.of(context).pushNamed('register'))
+                            .then((value) => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => register())))
                             .onError((error, stackTrace) {
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             content: Text("ERROR ${error.toString()}"),
