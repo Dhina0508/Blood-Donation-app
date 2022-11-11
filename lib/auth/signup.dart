@@ -10,6 +10,9 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
   bool _isHidden = true;
+  bool _ishidden1 = true;
+  var visible = "";
+  var visible1 = "";
 
   TextEditingController _Usernamecontroller = TextEditingController();
 
@@ -28,11 +31,11 @@ class _SignUpState extends State<SignUp> {
           width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
             gradient: LinearGradient(colors: [
-              Color.fromARGB(210, 223, 52, 52),
+              Color.fromARGB(210, 240, 23, 23),
               Color.fromARGB(210, 234, 161, 161),
-              Color.fromARGB(210, 234, 161, 161),
-              Color.fromARGB(210, 223, 52, 52),
-            ], begin: Alignment.topRight, end: Alignment.bottomLeft),
+              Color.fromARGB(210, 211, 199, 199),
+              Color.fromARGB(210, 52, 47, 47),
+            ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
           ),
           child: SafeArea(
             child: Center(
@@ -45,11 +48,11 @@ class _SignUpState extends State<SignUp> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       gradient: LinearGradient(colors: [
-                        Color.fromARGB(221, 241, 32, 32),
-                        Color.fromARGB(234, 219, 33, 219),
-                        Color.fromARGB(210, 52, 18, 175),
-                        Color.fromARGB(210, 52, 18, 175),
-                      ], begin: Alignment.topRight, end: Alignment.bottomLeft),
+                        Color.fromARGB(210, 240, 23, 23),
+                        Color.fromARGB(210, 234, 161, 161),
+                        Color.fromARGB(210, 211, 199, 199),
+                        Color.fromARGB(210, 52, 47, 47),
+                      ], begin: Alignment.topLeft, end: Alignment.bottomRight),
                     ),
                     child: Text(
                       'BLOOD DONATION',
@@ -93,13 +96,25 @@ class _SignUpState extends State<SignUp> {
                     obscureText: _isHidden,
                     decoration: InputDecoration(
                         fillColor: Colors.grey.shade100,
-                        suffixIcon: InkWell(
-                          onTap: _togglePasswordView,
-                          child: Icon(
-                            Icons.visibility,
-                            size: 25,
-                          ),
-                        ),
+                        suffixIcon: visible == ""
+                            ? InkWell(
+                                onTap: () {
+                                  _togglePasswordView();
+                                  visible = "1";
+                                },
+                                child: Icon(
+                                  Icons.visibility_off,
+                                  size: 25,
+                                ))
+                            : InkWell(
+                                onTap: () {
+                                  _togglePasswordView();
+                                  visible = "";
+                                },
+                                child: Icon(
+                                  Icons.visibility,
+                                  size: 25,
+                                )),
                         filled: true,
                         hintText: 'Enter Password',
                         hintStyle: TextStyle(color: Colors.black),
@@ -118,16 +133,28 @@ class _SignUpState extends State<SignUp> {
                   child: TextField(
                     style: TextStyle(color: Colors.black),
                     controller: _RePasswordcontroller,
-                    obscureText: _isHidden,
+                    obscureText: _ishidden1,
                     decoration: InputDecoration(
                         fillColor: Colors.grey.shade100,
-                        suffixIcon: InkWell(
-                          onTap: _togglePasswordView,
-                          child: Icon(
-                            Icons.visibility,
-                            size: 25,
-                          ),
-                        ),
+                        suffixIcon: visible1 == ""
+                            ? InkWell(
+                                onTap: () {
+                                  _togglePasswordView1();
+                                  visible1 = "1";
+                                },
+                                child: Icon(
+                                  Icons.visibility_off,
+                                  size: 25,
+                                ))
+                            : InkWell(
+                                onTap: () {
+                                  _togglePasswordView1();
+                                  visible1 = "";
+                                },
+                                child: Icon(
+                                  Icons.visibility,
+                                  size: 25,
+                                )),
                         filled: true,
                         hintText: 'Confirm Password',
                         hintStyle: TextStyle(color: Colors.black),
@@ -145,6 +172,12 @@ class _SignUpState extends State<SignUp> {
                   height: 60,
                 ),
                 ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color.fromRGBO(236, 13, 53, 1),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      fixedSize: const Size(120, 50),
+                    ),
                     onPressed: () {
                       if (_Passwordcontroller.text ==
                           _RePasswordcontroller.text) {
@@ -191,6 +224,12 @@ class _SignUpState extends State<SignUp> {
   void _togglePasswordView() {
     setState(() {
       _isHidden = !_isHidden;
+    });
+  }
+
+  void _togglePasswordView1() {
+    setState(() {
+      _ishidden1 = !_ishidden1;
     });
   }
 }

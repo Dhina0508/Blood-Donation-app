@@ -1,4 +1,3 @@
-import 'package:blood_donation/screens/chat_screens/chatscreen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -104,7 +103,7 @@ class _bloodprofState extends State<bloodprof> {
                                 width: 15,
                               ),
                               Text(
-                                "UHID_Id : ",
+                                "Patient UHID : ",
                                 style: TextStyle(
                                     fontSize: 25,
                                     fontWeight: FontWeight.w500,
@@ -128,7 +127,7 @@ class _bloodprofState extends State<bloodprof> {
                                 width: 15,
                               ),
                               Text(
-                                "Units Needed : ",
+                                "No of Units Needed : ",
                                 style: TextStyle(
                                     fontSize: 25,
                                     fontWeight: FontWeight.w500,
@@ -152,7 +151,7 @@ class _bloodprofState extends State<bloodprof> {
                                 width: 15,
                               ),
                               Text(
-                                'Blood Needed : ',
+                                'Blood Type Needed : ',
                                 style: TextStyle(
                                     fontSize: 25,
                                     fontFamily: 'JosefinSans',
@@ -207,7 +206,7 @@ class _bloodprofState extends State<bloodprof> {
                                 width: 15,
                               ),
                               Text(
-                                'About the person: ',
+                                'Reason for Admission: ',
                                 style: TextStyle(
                                     fontSize: 25,
                                     fontFamily: 'JosefinSans',
@@ -346,7 +345,7 @@ class _bloodprofState extends State<bloodprof> {
                                         width: 10,
                                       ),
                                       Text(
-                                        'Accept  ',
+                                        '   Chat   ',
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold,
