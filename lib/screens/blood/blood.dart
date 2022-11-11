@@ -65,6 +65,13 @@ class _profileState extends State<blood> {
                   });
             }),
       ),
+      floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.add),
+          backgroundColor: Colors.red,
+          onPressed: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => bloodreg()));
+          }),
     );
   }
 }

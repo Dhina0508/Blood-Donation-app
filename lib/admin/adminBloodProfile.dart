@@ -121,32 +121,6 @@ class _AdminBloodProfileState extends State<AdminBloodProfile> {
                           SizedBox(
                             height: 20,
                           ),
-                          Row(
-                            children: [
-                              SizedBox(
-                                width: 15,
-                              ),
-                              Text(
-                                ' Patient Address: ',
-                                style: TextStyle(
-                                    fontSize: 25,
-                                    fontFamily: 'JosefinSans',
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.brown),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 8.0, left: 15),
-                            child: Text(
-                              widget.value['Address'],
-                              style: TextStyle(
-                                  fontSize: 25, fontWeight: FontWeight.bold),
-                            ),
-                          ),
                           SizedBox(
                             height: 20,
                           ),

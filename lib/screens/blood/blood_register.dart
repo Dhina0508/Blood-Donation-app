@@ -385,7 +385,6 @@ class _registerState extends State<bloodreg> {
                                   _datecontroller != '' &&
                                   _UHIDcontorller.text != '' &&
                                   _Unitcontroller.text != '' &&
-                                  _bloodController.text != '' &&
                                   _HospitalNameController.text != '' &&
                                   _HospitalAddressController.text != '' &&
                                   _YourNameController.text != '' &&
