@@ -426,6 +426,15 @@ class _bloodprofState extends State<bloodprof> {
                                                         TextInputType.number,
                                                   ),
                                                   ElevatedButton(
+                                                      style: ElevatedButton
+                                                          .styleFrom(
+                                                              backgroundColor:
+                                                                  Color
+                                                                      .fromARGB(
+                                                                          255,
+                                                                          222,
+                                                                          81,
+                                                                          70)),
                                                       onPressed: () {
                                                         PostSubmit(
                                                             _Units.text,
@@ -439,7 +448,7 @@ class _bloodprofState extends State<bloodprof> {
                                                         Navigator.of(context)
                                                             .pop();
                                                       },
-                                                      child: Text('Submit'))
+                                                      child: Text('Donate'))
                                                 ],
                                               ),
                                             ),
