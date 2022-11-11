@@ -78,6 +78,7 @@ class _MyRequestState extends State<MyRequest> {
                               else if (x['Status'] == "Rejected")
                                 Icon(
                                   Icons.not_interested_rounded,
+                                  size: 18,
                                   color: Colors.red,
                                 )
                             ],

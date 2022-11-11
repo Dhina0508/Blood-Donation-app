@@ -80,12 +80,14 @@ class _registerState extends State<bloodreg> {
       "user": "admin",
       "Date": _datecontroller.text,
       "Status": "Pending",
-      "units": _Unitcontroller.text,
+      "units": req_units == "Need Extra Unit of Blood"
+          ? _Unitcontroller.text
+          : req_units,
       "Time": DateTime.now(),
       "email": FirebaseAuth.instance.currentUser!.email
     }).then((value) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text("Details Of The User Has Been Added"),
+        content: Text("Request has been Sent"),
         behavior: SnackBarBehavior.floating,
       ));
       Navigator.of(context).pop();
@@ -97,7 +99,7 @@ class _registerState extends State<bloodreg> {
     });
   }
 
-  final sectors = [
+  final blood_type = [
     "O +ve",
     "O -ve",
     "A +ve",
@@ -108,7 +110,21 @@ class _registerState extends State<bloodreg> {
     "AB -ve",
     "Others"
   ];
+  final units = [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "Need Extra Unit of Blood"
+  ];
   String? value;
+  String? req_units;
 
   @override
   Widget build(BuildContext context) {
@@ -181,14 +197,15 @@ class _registerState extends State<bloodreg> {
                           margin: EdgeInsets.all(3),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
-                              border: Border.all(color: Colors.grey, width: 1)),
+                              border:
+                                  Border.all(color: Colors.black, width: 1)),
                           child: DropdownButtonHideUnderline(
                             child: DropdownButton<String>(
                                 dropdownColor: Colors.white,
                                 hint: Text(
                                   'Select Blood Group',
                                   style: TextStyle(
-                                      fontSize: 25, color: Colors.grey),
+                                      fontSize: 17, color: Colors.grey),
                                 ),
                                 value: value,
                                 style: TextStyle(color: Colors.black),
@@ -197,7 +214,7 @@ class _registerState extends State<bloodreg> {
                                   Icons.arrow_drop_down,
                                   color: Colors.black,
                                 ),
-                                items: sectors.map(buildMenuItem).toList(),
+                                items: blood_type.map(buildMenuItem).toList(),
                                 onChanged: (value) => setState(() {
                                       this.value = value;
                                     })),
@@ -222,6 +239,67 @@ class _registerState extends State<bloodreg> {
                             )
                           : Container(),
                       value == 'Others'
+                          ? Container()
+                          : Divider(
+                              color: Colors.black,
+                              indent: 8,
+                              endIndent: 8,
+                            ),
+                      ListTile(
+                        leading: Icon(
+                          Icons.bloodtype_outlined,
+                          color: Colors.red,
+                          size: 40,
+                        ),
+                        title: Container(
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                          margin: EdgeInsets.all(3),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              border:
+                                  Border.all(color: Colors.black, width: 1)),
+                          child: DropdownButtonHideUnderline(
+                            child: DropdownButton<String>(
+                                dropdownColor: Colors.white,
+                                hint: Text(
+                                  'Select Number of Units Needed',
+                                  style: TextStyle(
+                                      fontSize: 17, color: Colors.grey),
+                                ),
+                                value: req_units,
+                                style: TextStyle(color: Colors.black),
+                                iconSize: 16 * 2,
+                                icon: Icon(
+                                  Icons.arrow_drop_down,
+                                  color: Colors.black,
+                                ),
+                                items: units.map(buildMenureq_units).toList(),
+                                onChanged: (req_units) => setState(() {
+                                      this.req_units = req_units;
+                                    })),
+                          ),
+                        ),
+                      ),
+                      req_units == "Need Extra Unit of Blood"
+                          ? Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 10, right: 8, left: 8),
+                              child: TextFormField(
+                                controller: _Unitcontroller,
+                                decoration: InputDecoration(
+                                  labelText: 'Number of Units Needed',
+                                  hintText: "Eg: 15 or 25",
+                                  prefixIcon: Icon(
+                                    Icons.bloodtype_outlined,
+                                    color: Colors.redAccent[200],
+                                    size: 40,
+                                  ),
+                                ),
+                              ),
+                            )
+                          : Container(),
+                      req_units == "Need Extra Unit of Blood"
                           ? Container()
                           : Divider(
                               color: Colors.black,
@@ -303,21 +381,6 @@ class _registerState extends State<bloodreg> {
                         padding:
                             const EdgeInsets.only(right: 8, top: 30, left: 8),
                         child: TextFormField(
-                          controller: _Unitcontroller,
-                          decoration: InputDecoration(
-                              labelText: 'Units needes',
-                              prefixIcon: Icon(
-                                Icons.shopping_bag_rounded,
-                                color: Colors.redAccent[200],
-                                size: 40,
-                              ),
-                              hintText: 'Eg: 5 units'),
-                        ),
-                      ),
-                      Padding(
-                        padding:
-                            const EdgeInsets.only(right: 8, top: 30, left: 8),
-                        child: TextFormField(
                           controller: _HospitalNameController,
                           decoration: InputDecoration(
                               labelText: 'Hospital Name',
@@ -387,7 +450,6 @@ class _registerState extends State<bloodreg> {
                                   _PhoneNoController.text != '' &&
                                   _datecontroller != '' &&
                                   _UHIDcontorller.text != '' &&
-                                  _Unitcontroller.text != '' &&
                                   _HospitalNameController.text != '' &&
                                   _HospitalAddressController.text != '' &&
                                   _YourNameController.text != '' &&
@@ -427,4 +489,11 @@ class _registerState extends State<bloodreg> {
         item,
         style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
       ));
+  DropdownMenuItem<String> buildMenureq_units(String req_units) =>
+      DropdownMenuItem(
+          value: req_units,
+          child: Text(
+            req_units,
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ));
 }

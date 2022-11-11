@@ -112,31 +112,7 @@ class _bloodprofState extends State<bloodprof> {
                                 width: 15,
                               ),
                               Text(
-                                "No of Units Needed : ",
-                                style: TextStyle(
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.w500,
-                                    fontFamily: 'JosefinSans',
-                                    color: Colors.brown),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(widget.value['units'],
-                              style: TextStyle(
-                                  fontSize: 25, fontWeight: FontWeight.bold)),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Row(
-                            children: [
-                              SizedBox(
-                                width: 15,
-                              ),
-                              Text(
-                                'Blood Type Needed : ',
+                                'Blood Needed : ',
                                 style: TextStyle(
                                     fontSize: 25,
                                     fontFamily: 'JosefinSans',
@@ -153,6 +129,30 @@ class _bloodprofState extends State<bloodprof> {
                             style: TextStyle(
                                 fontSize: 25, fontWeight: FontWeight.bold),
                           ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Row(
+                            children: [
+                              SizedBox(
+                                width: 15,
+                              ),
+                              Text(
+                                "No of Units Needed : ",
+                                style: TextStyle(
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.w500,
+                                    fontFamily: 'JosefinSans',
+                                    color: Colors.brown),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(widget.value['units'],
+                              style: TextStyle(
+                                  fontSize: 25, fontWeight: FontWeight.bold)),
                           SizedBox(
                             height: 20,
                           ),
@@ -319,7 +319,8 @@ class _bloodprofState extends State<bloodprof> {
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: ElevatedButton(
-                                  onPressed: () {},
+                                  onPressed: () =>
+                                      _acceptbuttonpressed(context, setState),
                                   child: Row(
                                     children: [
                                       Icon(
@@ -381,3 +382,73 @@ class _bloodprofState extends State<bloodprof> {
     );
   }
 }
+
+Future<bool> _acceptbuttonpressed(
+    BuildContext context, StateSetter setState) async {
+  bool acceptUnits = await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        final units = [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+        ];
+        String? req_units;
+        return AlertDialog(
+          title: Text(
+            'How many Units of Blood,Can you Donate?',
+            style: TextStyle(fontSize: 17),
+          ),
+          content: Container(
+            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+            margin: EdgeInsets.all(3),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30),
+                border: Border.all(color: Colors.black, width: 1)),
+            child: DropdownButtonHideUnderline(
+              child: DropdownButton<String>(
+                  dropdownColor: Colors.white,
+                  hint: Text(
+                    'Select Number of Units',
+                    style: TextStyle(fontSize: 14, color: Colors.grey.shade600),
+                  ),
+                  value: req_units,
+                  style: TextStyle(color: Colors.black),
+                  iconSize: 16,
+                  icon: Icon(
+                    Icons.arrow_drop_down,
+                    color: Colors.black,
+                  ),
+                  items: units.map(buildMenureq_units).toList(),
+                  onChanged: (req_units) => setState(() {
+                        req_units = req_units;
+                      })),
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(onPressed: () {}, child: Text('Donate')),
+            TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop(false);
+                },
+                child: Text('cancel')),
+          ],
+        );
+      });
+  return acceptUnits;
+}
+
+DropdownMenuItem<String> buildMenureq_units(String req_units) =>
+    DropdownMenuItem(
+        value: req_units,
+        child: Text(
+          req_units,
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        ));

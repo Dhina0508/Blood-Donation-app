@@ -99,6 +99,30 @@ class _AdminBloodProfileState extends State<AdminBloodProfile> {
                                 width: 15,
                               ),
                               Text(
+                                "Patient UHID : ",
+                                style: TextStyle(
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.w500,
+                                    fontFamily: 'JosefinSans',
+                                    color: Colors.brown),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(widget.value['UHID'],
+                              style: TextStyle(
+                                  fontSize: 25, fontWeight: FontWeight.bold)),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Row(
+                            children: [
+                              SizedBox(
+                                width: 15,
+                              ),
+                              Text(
                                 'Blood Needed : ',
                                 style: TextStyle(
                                     fontSize: 25,
@@ -116,30 +140,6 @@ class _AdminBloodProfileState extends State<AdminBloodProfile> {
                             style: TextStyle(
                                 fontSize: 25, fontWeight: FontWeight.bold),
                           ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Row(
-                            children: [
-                              SizedBox(
-                                width: 15,
-                              ),
-                              Text(
-                                "Patient UHID : ",
-                                style: TextStyle(
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.w500,
-                                    fontFamily: 'JosefinSans',
-                                    color: Colors.brown),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(widget.value['UHID'],
-                              style: TextStyle(
-                                  fontSize: 25, fontWeight: FontWeight.bold)),
                           SizedBox(
                             height: 20,
                           ),
@@ -202,7 +202,7 @@ class _AdminBloodProfileState extends State<AdminBloodProfile> {
                                 width: 15,
                               ),
                               Text(
-                                'About the person: ',
+                                'Reason for Admission : ',
                                 style: TextStyle(
                                     fontSize: 25,
                                     fontFamily: 'JosefinSans',
