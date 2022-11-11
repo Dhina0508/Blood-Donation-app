@@ -23,6 +23,17 @@ class _AdminBloodProfileState extends State<AdminBloodProfile> {
     });
   }
 
+  RemoveRequest(@required id) async {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    var currentuser = _auth.currentUser;
+    CollectionReference _CollectionReference =
+        FirebaseFirestore.instance.collection("Blood_Wait_list");
+    return _CollectionReference.doc(id)
+        .update({"Status": "Rejected", "user": ""}).then((value) {
+      Navigator.of(context).pop();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -300,13 +311,7 @@ class _AdminBloodProfileState extends State<AdminBloodProfile> {
                                 padding: const EdgeInsets.all(8.0),
                                 child: ElevatedButton(
                                   onPressed: () {
-                                    String id = widget.value['id'];
-                                    print(id);
-                                    final docUser = FirebaseFirestore.instance
-                                        .collection("Blood_Wait_list")
-                                        .doc(id.toString());
-                                    docUser.delete();
-                                    Navigator.of(context).pop();
+                                    RemoveRequest(widget.value['id']);
                                   },
                                   child: Row(
                                     children: [

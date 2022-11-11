@@ -65,15 +65,21 @@ class _MyRequestState extends State<MyRequest> {
                               SizedBox(
                                 width: 6,
                               ),
-                              x['Status'] == "Pending"
-                                  ? Icon(
-                                      Icons.done_rounded,
-                                      color: Colors.red,
-                                    )
-                                  : Icon(
-                                      Icons.done_all_rounded,
-                                      color: Colors.green,
-                                    )
+                              if (x['Status'] == "Pending")
+                                Icon(
+                                  Icons.done_rounded,
+                                  color: Colors.orange,
+                                )
+                              else if (x['Status'] == "Accepted")
+                                Icon(
+                                  Icons.done_all_rounded,
+                                  color: Colors.green,
+                                )
+                              else if (x['Status'] == "Rejected")
+                                Icon(
+                                  Icons.not_interested_rounded,
+                                  color: Colors.red,
+                                )
                             ],
                           ),
                         ),
