@@ -1,3 +1,4 @@
+import 'package:blood_donation/screens/blood/DonorPage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -36,17 +37,15 @@ class _bloodprofState extends State<bloodprof> {
       int val = 0;
       val = gotUnits + units;
       if (val < reqUnits)
-        return _CollectionReference.doc(id)
-            .update({"GotUnits": val.toString()}).then((value) {
-          Fluttertoast.showToast(
-              msg: "Thanks For Your Effort",
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.BOTTOM,
-              timeInSecForIosWeb: 1,
-              backgroundColor: Colors.blueGrey,
-              textColor: Colors.white,
-              fontSize: 16.0);
-        });
+        return Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => DonorPage(
+                      email: FirebaseAuth.instance.currentUser?.email,
+                      UnitNo: reqUnits,
+                      gotReqNo: gotUnits,
+                      GetingNo: units,
+                    )));
       else if (val == reqUnits) {
         print(id);
         final docUser = FirebaseFirestore.instance
@@ -434,10 +433,6 @@ class _bloodprofState extends State<bloodprof> {
                                                             widget.value[
                                                                 'GotUnits'],
                                                             widget.value['id']);
-                                                        Navigator.of(context)
-                                                            .pop();
-                                                        Navigator.of(context)
-                                                            .pop();
                                                       },
                                                       child: Text('Submit'))
                                                 ],

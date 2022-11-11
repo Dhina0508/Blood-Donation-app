@@ -31,6 +31,7 @@ class _registerState extends State<bloodreg> {
   TextEditingController _datecontroller = TextEditingController();
   TextEditingController _Unitcontroller = TextEditingController();
   TextEditingController _UHIDcontorller = TextEditingController();
+  var email = FirebaseAuth.instance.currentUser?.email;
 
   // SendUserDataToDB() async {
   //   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -59,6 +60,12 @@ class _registerState extends State<bloodreg> {
   //     ));
   //   });
   // }
+
+  CreatRoom() {
+    CollectionReference _CollectionReference =
+        FirebaseFirestore.instance.collection("Donors");
+    return _CollectionReference.doc(email).set({"Requestor": email});
+  }
 
   CommonDb() {
     final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -458,6 +465,7 @@ class _registerState extends State<bloodreg> {
                                   _DiscriptionController.text != '') {
                                 // SendUserDataToDB();
                                 CommonDb();
+                                CreatRoom();
                               } else {
                                 ScaffoldMessenger.of(context)
                                     .showSnackBar(SnackBar(
