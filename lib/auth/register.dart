@@ -150,7 +150,10 @@ class _registerState extends State<register> {
                         radius: 50,
                       ),
                     ),
-                    Text('Click to add Image'),
+                    Text(
+                      'Click to add Image',
+                      style: TextStyle(fontSize: 11),
+                    ),
                     Padding(
                       padding:
                           const EdgeInsets.only(right: 8, top: 30, left: 8),
@@ -261,6 +264,8 @@ class _registerState extends State<register> {
                       padding:
                           const EdgeInsets.only(right: 8, top: 30.0, left: 8),
                       child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.red),
                           onPressed: () {
                             if (_NameController.text != "" &&
                                 _EmailController.text != "" &&
@@ -268,14 +273,22 @@ class _registerState extends State<register> {
                                 _JobController.text != "" &&
                                 _PhoneNoController.text != "" &&
                                 _AddressController.text != "") {
+                              if (file == null) {
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(SnackBar(
+                                  content:
+                                      Text("Please Select Your profile Photo"),
+                                  behavior: SnackBarBehavior.floating,
+                                  backgroundColor: Colors.black,
+                                ));
+                              }
                               SendUserDataToDB();
                             } else {
                               ScaffoldMessenger.of(context)
                                   .showSnackBar(SnackBar(
-                                content:
-                                    Text("Error : Details cannot be empty"),
+                                content: Text(" Details cannot be empty"),
                                 behavior: SnackBarBehavior.floating,
-                                backgroundColor: Colors.red,
+                                backgroundColor: Colors.black,
                               ));
                             }
                           },

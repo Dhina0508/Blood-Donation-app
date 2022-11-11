@@ -311,7 +311,7 @@ class _registerState extends State<bloodreg> {
                                 color: Colors.redAccent[200],
                                 size: 40,
                               ),
-                              hintText: '5 units'),
+                              hintText: 'Eg: 5 units'),
                         ),
                       ),
                       Padding(
@@ -366,19 +366,22 @@ class _registerState extends State<bloodreg> {
                           controller: _PhoneNoController,
                           keyboardType: TextInputType.phone,
                           decoration: InputDecoration(
-                            labelText: ' Your Whatsapp Number',
-                            prefixIcon: Icon(
-                              Icons.phone_android_rounded,
-                              color: Colors.redAccent[200],
-                              size: 40,
-                            ),
-                          ),
+                              labelText: ' Your Contact Number',
+                              prefixIcon: Icon(
+                                Icons.phone_android_rounded,
+                                color: Colors.redAccent[200],
+                                size: 40,
+                              ),
+                              hintText: 'Requestor Mobile number',
+                              hintStyle: TextStyle(fontSize: 14)),
                         ),
                       ),
                       Padding(
                         padding:
                             const EdgeInsets.only(right: 8, top: 30.0, left: 8),
                         child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.red),
                             onPressed: () {
                               if (_NameController.text != '' &&
                                   _PhoneNoController.text != '' &&

@@ -101,7 +101,11 @@ class _GetEmailState extends State<GetEmail> {
                       }
 
                       if (snapshot.hasData && !snapshot.data!.exists) {
-                        return Center(child: Text("Email does not exist"));
+                        return Center(
+                            child: Text(
+                          "Email does not exist",
+                          style: TextStyle(fontSize: 20),
+                        ));
                       }
 
                       if (snapshot.connectionState == ConnectionState.done) {
