@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class bloodprof extends StatefulWidget {
   var value;
@@ -22,9 +23,71 @@ class _bloodprofState extends State<bloodprof> {
   //     throw "cannot launch $url";
   //   }
   // }
+  PostSubmit(
+      @required Units, @required ReqUnits, @required GotUnits, @required id) {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    CollectionReference _CollectionReference =
+        FirebaseFirestore.instance.collection("Blood_Wait_list");
+    var units = int.parse(Units);
+    var reqUnits = int.parse(ReqUnits);
+    var gotUnits = int.parse(GotUnits);
+
+    if (reqUnits >= units) {
+      int val = 0;
+      val = gotUnits + units;
+      if (val < reqUnits)
+        return _CollectionReference.doc(id)
+            .update({"GotUnits": val.toString()}).then((value) {
+          Fluttertoast.showToast(
+              msg: "Thanks For Your Effort",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.blueGrey,
+              textColor: Colors.white,
+              fontSize: 16.0);
+        });
+      else if (val == reqUnits) {
+        print(id);
+        final docUser = FirebaseFirestore.instance
+            .collection("Blood_Wait_list")
+            .doc(id.toString());
+        return docUser.delete().then((value) {
+          Fluttertoast.showToast(
+              msg: "Thanks For Your Effort",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.blueGrey,
+              textColor: Colors.white,
+              fontSize: 16.0);
+        });
+      } else {
+        return Fluttertoast.showToast(
+            msg: "We dont need more",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.blueGrey,
+            textColor: Colors.white,
+            fontSize: 16.0);
+      }
+    } else {
+      return Fluttertoast.showToast(
+          msg: "We dont need more",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.blueGrey,
+          textColor: Colors.white,
+          fontSize: 16.0);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController _Units = TextEditingController();
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -151,6 +214,30 @@ class _bloodprofState extends State<bloodprof> {
                             height: 10,
                           ),
                           Text(widget.value['units'],
+                              style: TextStyle(
+                                  fontSize: 25, fontWeight: FontWeight.bold)),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Row(
+                            children: [
+                              SizedBox(
+                                width: 15,
+                              ),
+                              Text(
+                                "No of Units We got : ",
+                                style: TextStyle(
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.w500,
+                                    fontFamily: 'JosefinSans',
+                                    color: Colors.brown),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(widget.value['GotUnits'],
                               style: TextStyle(
                                   fontSize: 25, fontWeight: FontWeight.bold)),
                           SizedBox(
@@ -319,8 +406,46 @@ class _bloodprofState extends State<bloodprof> {
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: ElevatedButton(
-                                  onPressed: () =>
-                                      _acceptbuttonpressed(context, setState),
+                                  onPressed: () {
+                                    showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return AlertDialog(
+                                            title:
+                                                Text("Enter the no of units"),
+                                            content: Container(
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  Text("We have " +
+                                                      widget.value['GotUnits'] +
+                                                      " units."),
+                                                  TextField(
+                                                    controller: _Units,
+                                                    keyboardType:
+                                                        TextInputType.number,
+                                                  ),
+                                                  ElevatedButton(
+                                                      onPressed: () {
+                                                        PostSubmit(
+                                                            _Units.text,
+                                                            widget
+                                                                .value['units'],
+                                                            widget.value[
+                                                                'GotUnits'],
+                                                            widget.value['id']);
+                                                        Navigator.of(context)
+                                                            .pop();
+                                                        Navigator.of(context)
+                                                            .pop();
+                                                      },
+                                                      child: Text('Submit'))
+                                                ],
+                                              ),
+                                            ),
+                                          );
+                                        });
+                                  },
                                   child: Row(
                                     children: [
                                       Icon(
@@ -388,6 +513,7 @@ Future<bool> _acceptbuttonpressed(
   bool acceptUnits = await showDialog(
       context: context,
       builder: (BuildContext context) {
+        TextEditingController _Units = new TextEditingController();
         final units = [
           "1",
           "2",
@@ -412,24 +538,9 @@ Future<bool> _acceptbuttonpressed(
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(30),
                 border: Border.all(color: Colors.black, width: 1)),
-            child: DropdownButtonHideUnderline(
-              child: DropdownButton<String>(
-                  dropdownColor: Colors.white,
-                  hint: Text(
-                    'Select Number of Units',
-                    style: TextStyle(fontSize: 14, color: Colors.grey.shade600),
-                  ),
-                  value: req_units,
-                  style: TextStyle(color: Colors.black),
-                  iconSize: 16,
-                  icon: Icon(
-                    Icons.arrow_drop_down,
-                    color: Colors.black,
-                  ),
-                  items: units.map(buildMenureq_units).toList(),
-                  onChanged: (req_units) => setState(() {
-                        req_units = req_units;
-                      })),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [Text("Enter the No of Units"), TextField()],
             ),
           ),
           actions: <Widget>[

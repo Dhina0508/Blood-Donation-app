@@ -53,6 +53,13 @@ class _FeedState extends State<Feed> {
                             size: 40,
                             color: Colors.red,
                           ),
+                          trailing: Text(
+                            x['Blood_Group'],
+                            style: TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.red),
+                          ),
                           title: Text(
                             "Patient Name: " + x['Name'],
                             style: TextStyle(

@@ -78,6 +78,7 @@ class _registerState extends State<bloodreg> {
       "Your_name": _YourNameController.text,
       "discription": _DiscriptionController.text,
       "user": "admin",
+      "GotUnits": "0",
       "Date": _datecontroller.text,
       "Status": "Pending",
       "units": req_units == "Need Extra Unit of Blood"
@@ -286,6 +287,7 @@ class _registerState extends State<bloodreg> {
                               padding: const EdgeInsets.only(
                                   top: 10, right: 8, left: 8),
                               child: TextFormField(
+                                keyboardType: TextInputType.number,
                                 controller: _Unitcontroller,
                                 decoration: InputDecoration(
                                   labelText: 'Number of Units Needed',

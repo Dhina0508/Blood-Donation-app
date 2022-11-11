@@ -14,7 +14,6 @@ class AdminBloodProfile extends StatefulWidget {
 class _AdminBloodProfileState extends State<AdminBloodProfile> {
   AcceptRequest(@required id) async {
     final FirebaseAuth _auth = FirebaseAuth.instance;
-    var currentuser = _auth.currentUser;
     CollectionReference _CollectionReference =
         FirebaseFirestore.instance.collection("Blood_Wait_list");
     return _CollectionReference.doc(id)
@@ -25,7 +24,6 @@ class _AdminBloodProfileState extends State<AdminBloodProfile> {
 
   RemoveRequest(@required id) async {
     final FirebaseAuth _auth = FirebaseAuth.instance;
-    var currentuser = _auth.currentUser;
     CollectionReference _CollectionReference =
         FirebaseFirestore.instance.collection("Blood_Wait_list");
     return _CollectionReference.doc(id)
