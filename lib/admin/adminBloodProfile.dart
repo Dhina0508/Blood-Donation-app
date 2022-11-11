@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class AdminBloodProfile extends StatefulWidget {
@@ -10,6 +12,17 @@ class AdminBloodProfile extends StatefulWidget {
 }
 
 class _AdminBloodProfileState extends State<AdminBloodProfile> {
+  AcceptRequest(@required id) async {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    var currentuser = _auth.currentUser;
+    CollectionReference _CollectionReference =
+        FirebaseFirestore.instance.collection("Blood_Wait_list");
+    return _CollectionReference.doc(id)
+        .update({"Status": "Accepted", "user": "user"}).then((value) {
+      Navigator.of(context).pop();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -259,18 +272,7 @@ class _AdminBloodProfileState extends State<AdminBloodProfile> {
                                 padding: const EdgeInsets.all(8.0),
                                 child: ElevatedButton(
                                   onPressed: () {
-                                    // launchwp(
-                                    //     number: ("+91" +
-                                    //         widget.value['PhoneNumber']),
-                                    //     bloodgroup:
-                                    //         (widget.value['Blood_Group']));
-                                    // String id = widget.value['id'];
-                                    // print(id);
-                                    // final docUser = FirebaseFirestore.instance
-                                    //     .collection("Common_Db")
-                                    //     .doc(id.toString());
-                                    // docUser.delete();
-                                    // Navigator.of(context).pop();
+                                    AcceptRequest(widget.value['id']);
                                   },
                                   child: Row(
                                     children: [
@@ -282,7 +284,7 @@ class _AdminBloodProfileState extends State<AdminBloodProfile> {
                                         width: 10,
                                       ),
                                       Text(
-                                        '   Chat   ',
+                                        'Accept ',
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold,
@@ -297,8 +299,15 @@ class _AdminBloodProfileState extends State<AdminBloodProfile> {
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: ElevatedButton(
-                                  onPressed: () =>
-                                      [Navigator.of(context).pop()],
+                                  onPressed: () {
+                                    String id = widget.value['id'];
+                                    print(id);
+                                    final docUser = FirebaseFirestore.instance
+                                        .collection("Blood_Wait_list")
+                                        .doc(id.toString());
+                                    docUser.delete();
+                                    Navigator.of(context).pop();
+                                  },
                                   child: Row(
                                     children: [
                                       Icon(
@@ -309,7 +318,7 @@ class _AdminBloodProfileState extends State<AdminBloodProfile> {
                                         width: 10,
                                       ),
                                       Text(
-                                        'Decline',
+                                        'Reject',
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold,

@@ -23,21 +23,6 @@ class _bloodprofState extends State<bloodprof> {
   //   }
   // }
 
-  var ChatRoomKey;
-
-  ChatRoomId({required number}) async {
-    var Email = FirebaseAuth.instance.currentUser!.email;
-    ChatRoomKey = "$number$Email";
-    print("chat room id: " + ChatRoomKey);
-  }
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    ChatRoomId(number: widget.value['PhoneNumber']);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -345,7 +330,7 @@ class _bloodprofState extends State<bloodprof> {
                                         width: 10,
                                       ),
                                       Text(
-                                        '   Chat   ',
+                                        'Accept',
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold,
@@ -373,7 +358,7 @@ class _bloodprofState extends State<bloodprof> {
                                         width: 10,
                                       ),
                                       Text(
-                                        'Remove',
+                                        'Nope  ',
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold,

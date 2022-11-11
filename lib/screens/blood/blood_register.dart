@@ -79,10 +79,10 @@ class _registerState extends State<bloodreg> {
       "discription": _DiscriptionController.text,
       "user": "admin",
       "Date": _datecontroller.text,
-      "Status": "Pending....",
+      "Status": "Pending",
       "units": _Unitcontroller.text,
       "Time": DateTime.now(),
-      "admin": "admin@email.com"
+      "email": FirebaseAuth.instance.currentUser!.email
     }).then((value) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text("Details Of The User Has Been Added"),
