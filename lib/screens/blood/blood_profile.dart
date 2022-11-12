@@ -41,7 +41,7 @@ class _bloodprofState extends State<bloodprof> {
             context,
             MaterialPageRoute(
                 builder: (context) => DonorPage(
-                      email: FirebaseAuth.instance.currentUser?.email,
+                      email: widget.value['email'],
                       UnitNo: reqUnits,
                       gotReqNo: gotUnits,
                       GetingNo: units,
@@ -386,109 +386,124 @@ class _bloodprofState extends State<bloodprof> {
                             height: 20,
                           ),
                           Spacer(),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: ElevatedButton(
-                                  onPressed: () {
-                                    showDialog(
-                                        context: context,
-                                        builder: (BuildContext context) {
-                                          return AlertDialog(
-                                            title:
-                                                Text("Enter the no of units"),
-                                            content: Container(
-                                              child: Column(
-                                                mainAxisSize: MainAxisSize.min,
-                                                children: [
-                                                  Text("We have " +
-                                                      widget.value['GotUnits'] +
-                                                      " units."),
-                                                  TextField(
-                                                    controller: _Units,
-                                                    keyboardType:
-                                                        TextInputType.number,
-                                                  ),
-                                                  ElevatedButton(
-                                                      style: ElevatedButton
-                                                          .styleFrom(
-                                                              backgroundColor:
-                                                                  Color
-                                                                      .fromARGB(
-                                                                          255,
-                                                                          222,
-                                                                          81,
-                                                                          70)),
-                                                      onPressed: () {
-                                                        PostSubmit(
-                                                            _Units.text,
-                                                            widget
-                                                                .value['units'],
+                          FirebaseAuth.instance.currentUser?.email !=
+                                  widget.value['email']
+                              ? Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: ElevatedButton(
+                                        onPressed: () {
+                                          showDialog(
+                                              context: context,
+                                              builder: (BuildContext context) {
+                                                return AlertDialog(
+                                                  title: Text(
+                                                      "Enter the no of units"),
+                                                  content: Container(
+                                                    child: Column(
+                                                      mainAxisSize:
+                                                          MainAxisSize.min,
+                                                      children: [
+                                                        Text("We have " +
                                                             widget.value[
-                                                                'GotUnits'],
-                                                            widget.value['id']);
-                                                      },
-                                                      child: Text('Donate'))
-                                                ],
-                                              ),
+                                                                'GotUnits'] +
+                                                            " units."),
+                                                        TextField(
+                                                          controller: _Units,
+                                                          keyboardType:
+                                                              TextInputType
+                                                                  .number,
+                                                        ),
+                                                        ElevatedButton(
+                                                            style: ElevatedButton
+                                                                .styleFrom(
+                                                                    backgroundColor:
+                                                                        Color.fromARGB(
+                                                                            255,
+                                                                            222,
+                                                                            81,
+                                                                            70)),
+                                                            onPressed: () {
+                                                              PostSubmit(
+                                                                  _Units.text,
+                                                                  widget.value[
+                                                                      'units'],
+                                                                  widget.value[
+                                                                      'GotUnits'],
+                                                                  widget.value[
+                                                                      'id']);
+                                                            },
+                                                            child:
+                                                                Text('Donate'))
+                                                      ],
+                                                    ),
+                                                  ),
+                                                );
+                                              });
+                                        },
+                                        child: Row(
+                                          children: [
+                                            Icon(
+                                              Icons.done,
+                                              color: Colors.green,
                                             ),
-                                          );
-                                        });
-                                  },
-                                  child: Row(
-                                    children: [
-                                      Icon(
-                                        Icons.done,
-                                        color: Colors.green,
+                                            SizedBox(
+                                              width: 10,
+                                            ),
+                                            Text(
+                                              'Accept',
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 20),
+                                            ),
+                                          ],
+                                        ),
+                                        // minWidth: MediaQuery.of(context).size.width,
+                                        // color: Colors.deepOrange,
                                       ),
-                                      SizedBox(
-                                        width: 10,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: ElevatedButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: Row(
+                                          children: [
+                                            Icon(
+                                              Icons.not_interested_rounded,
+                                              color: Colors.red,
+                                            ),
+                                            SizedBox(
+                                              width: 10,
+                                            ),
+                                            Text(
+                                              'Nope  ',
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 20),
+                                            ),
+                                          ],
+                                        ),
+                                        // minWidth: MediaQuery.of(context).size.width,
+                                        // color: Colors.deepOrange,
                                       ),
-                                      Text(
-                                        'Accept',
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 20),
-                                      ),
-                                    ],
-                                  ),
-                                  // minWidth: MediaQuery.of(context).size.width,
-                                  // color: Colors.deepOrange,
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: ElevatedButton(
+                                    ),
+                                  ],
+                                )
+                              : ElevatedButton(
                                   onPressed: () {
+                                    final docUser = FirebaseFirestore.instance
+                                        .collection("Blood_Wait_list")
+                                        .doc(widget.value['id'].toString());
+                                    docUser.delete();
                                     Navigator.of(context).pop();
                                   },
-                                  child: Row(
-                                    children: [
-                                      Icon(
-                                        Icons.not_interested_rounded,
-                                        color: Colors.red,
-                                      ),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                      Text(
-                                        'Nope  ',
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 20),
-                                      ),
-                                    ],
-                                  ),
-                                  // minWidth: MediaQuery.of(context).size.width,
-                                  // color: Colors.deepOrange,
-                                ),
-                              ),
-                            ],
-                          )
+                                  child: Text('Remove Your Request'))
                         ],
                       ),
                     ),
