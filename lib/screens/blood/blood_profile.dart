@@ -36,7 +36,7 @@ class _bloodprofState extends State<bloodprof> {
     if (reqUnits >= units) {
       int val = 0;
       val = gotUnits + units;
-      if (val < reqUnits)
+      if (val <= reqUnits && val != 0)
         return Navigator.push(
             context,
             MaterialPageRoute(
@@ -45,23 +45,10 @@ class _bloodprofState extends State<bloodprof> {
                       UnitNo: reqUnits,
                       gotReqNo: gotUnits,
                       GetingNo: units,
+                      id: widget.value['id'],
+                      val: val,
                     )));
-      else if (val == reqUnits) {
-        print(id);
-        final docUser = FirebaseFirestore.instance
-            .collection("Blood_Wait_list")
-            .doc(id.toString());
-        return docUser.delete().then((value) {
-          Fluttertoast.showToast(
-              msg: "Thanks For Your Effort",
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.BOTTOM,
-              timeInSecForIosWeb: 1,
-              backgroundColor: Colors.blueGrey,
-              textColor: Colors.white,
-              fontSize: 16.0);
-        });
-      } else {
+      else {
         return Fluttertoast.showToast(
             msg: "We dont need more",
             toastLength: Toast.LENGTH_SHORT,

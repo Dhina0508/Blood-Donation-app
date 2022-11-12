@@ -1,3 +1,4 @@
+import 'package:blood_donation/screens/blood/BloodDonators.dart';
 import 'package:blood_donation/screens/blood/UserRequest.dart';
 import 'package:blood_donation/screens/blood/blood.dart';
 import 'package:blood_donation/screens/dimensions.dart';
@@ -145,6 +146,22 @@ class _HomeState extends State<Home> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => MyRequest()))
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 10),
+                    child: ListTile(
+                      title: Text('My Donors'),
+                      leading: Icon(
+                        Icons.favorite,
+                        color: Colors.red,
+                      ),
+                      onTap: () => [
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => BloodDonors()))
                       ],
                     ),
                   ),
