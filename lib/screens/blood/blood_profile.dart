@@ -503,7 +503,7 @@ class _bloodprofState extends State<bloodprof> {
                                     docUser.delete();
                                     Navigator.of(context).pop();
                                   },
-                                  child: Text('Remove Your Request'))
+                                  child: Text('Remove My Request'))
                         ],
                       ),
                     ),

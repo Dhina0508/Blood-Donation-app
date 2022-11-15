@@ -1,6 +1,7 @@
 import 'package:blood_donation/screens/blood/BloodDonators.dart';
 import 'package:blood_donation/screens/blood/UserRequest.dart';
 import 'package:blood_donation/screens/blood/blood.dart';
+import 'package:blood_donation/screens/blood/blood_register.dart';
 import 'package:blood_donation/screens/dimensions.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -30,6 +31,7 @@ class _HomeState extends State<Home> {
       backgroundColor: Color.fromARGB(255, 202, 191, 191),
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         iconTheme: IconThemeData(color: Colors.black),
         elevation: 0,
         centerTitle: true,
@@ -51,141 +53,115 @@ class _HomeState extends State<Home> {
                 color: Colors.black,
                 fontFamily: 'Cinzel',
                 fontWeight: FontWeight.bold,
-                fontSize: 20),
+                fontSize: 23),
           ),
         ),
       ),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Container()
+          Spacer(
+            flex: 1,
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: 50, right: 50),
+            child: Card(
+              elevation: 10,
+              shadowColor: Colors.black,
+              child: ListTile(
+                leading: Icon(
+                  Icons.bloodtype,
+                  color: Colors.red,
+                ),
+                title: Text(
+                  'Requested List',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => blood()));
+                },
+              ),
+            ),
+          ),
+
+          SizedBox(
+            height: 40,
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: 50, right: 50),
+            child: Card(
+              elevation: 10,
+              child: ListTile(
+                leading: Icon(
+                  Icons.bloodtype_outlined,
+                  color: Colors.red,
+                ),
+                title: Text(
+                  'Request Blood',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => bloodreg()));
+                },
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 40,
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: 50, right: 50),
+            child: Card(
+              elevation: 10,
+              child: ListTile(
+                leading: Icon(
+                  Icons.handshake,
+                  color: Colors.red,
+                ),
+                title: Text(
+                  'My Request',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => MyRequest()));
+                },
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 40,
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: 50, right: 50),
+            child: Card(
+              elevation: 10,
+              child: ListTile(
+                leading: Icon(
+                  Icons.favorite,
+                  color: Colors.red,
+                ),
+                title: Text(
+                  'My Donors',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => BloodDonors()));
+                },
+              ),
+            ),
+          ),
+          Spacer()
+
           //     child: Center(
           //   child: 'hello'.text.xl4.bold.make().shimmer(
           //       primaryColor: Vx.amber100, secondaryColor: Colors.green),
           // )
         ],
       ),
-      drawer: FutureBuilder<DocumentSnapshot>(
-          future: users.doc(FirebaseAuth.instance.currentUser!.email).get(),
-          builder:
-              (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-            if (snapshot.hasError) {
-              return Text("Something went wrong");
-            }
-
-            if (snapshot.hasData && !snapshot.data!.exists) {
-              return Center(child: Text("Document does not exist"));
-            }
-
-            if (snapshot.connectionState == ConnectionState.done) {
-              Map<String, dynamic> data =
-                  snapshot.data!.data() as Map<String, dynamic>;
-              return Drawer(
-                  child: ListView(
-                padding: EdgeInsets.zero,
-                children: <Widget>[
-                  UserAccountsDrawerHeader(
-                    otherAccountsPictures: <Widget>[
-                      Icon(
-                        Icons.brightness_2_rounded,
-                        color: Colors.white,
-                      ),
-                    ],
-                    accountName: GestureDetector(
-                      child: Text(
-                        "${data['Name']}",
-                        style: TextStyle(fontSize: 18, fontFamily: 'Cinzel'),
-                      ),
-                      onTap: () {
-                        Navigator.of(context).pushNamed('profile');
-                      },
-                    ),
-                    accountEmail: GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).pushNamed('profile');
-                        },
-                        child: Text("${data['Email']}")),
-                    currentAccountPicture: GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).pushNamed('profile');
-                      },
-                      child: CircleAvatar(
-                        backgroundColor: Colors.white,
-                        backgroundImage: NetworkImage(
-                          "${data['img']}",
-                        ),
-                      ),
-                    ),
-                    decoration: BoxDecoration(
-                      color: Color.fromRGBO(248, 68, 100, 300),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 10),
-                    child: ListTile(
-                      title: Text('Blood Donation'),
-                      leading: Icon(
-                        Icons.bloodtype,
-                        color: Colors.red,
-                      ),
-                      onTap: () => [
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => blood()))
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 10),
-                    child: ListTile(
-                      title: Text('My Requests'),
-                      leading: Icon(
-                        Icons.emoji_objects_rounded,
-                        color: Colors.red,
-                      ),
-                      onTap: () => [
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => MyRequest()))
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 10),
-                    child: ListTile(
-                      title: Text('My Donors'),
-                      leading: Icon(
-                        Icons.favorite,
-                        color: Colors.red,
-                      ),
-                      onTap: () => [
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => BloodDonors()))
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10.0),
-                    child: ListTile(
-                      title: Text(
-                        'Log Out',
-                        style: TextStyle(color: Colors.black),
-                      ),
-                      leading: Icon(Icons.logout),
-                      onTap: () async {
-                        service.signOut(context);
-                        SharedPreferences pref =
-                            await SharedPreferences.getInstance();
-                        pref.remove("email");
-                      },
-                    ),
-                  ),
-                ],
-              ));
-            }
-            return Drawer();
-          }),
     );
   }
 }

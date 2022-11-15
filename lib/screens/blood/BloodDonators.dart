@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class BloodDonors extends StatefulWidget {
   const BloodDonors({super.key});
@@ -47,7 +48,10 @@ class _BloodDonorsState extends State<BloodDonors> {
                       ),
                       trailing: IconButton(
                         icon: Icon(Icons.call, color: Colors.green),
-                        onPressed: () => [],
+                        onPressed: () {
+                          final number = _DocumentSnapshot["PhNo"];
+                          launch('tel:$number');
+                        },
                       ),
                     ));
               },
