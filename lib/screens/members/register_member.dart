@@ -34,9 +34,23 @@ class _RegisterMembersState extends State<RegisterMembers> {
   TextEditingController _PhoneNoController = TextEditingController();
 
   TextEditingController _AddressController = TextEditingController();
+  TextEditingController _sexController = TextEditingController();
 
   TextEditingController _BloodController = TextEditingController();
   TextEditingController _dobcontroller = TextEditingController();
+  String? value;
+
+  final blood_type = [
+    "O +ve",
+    "O -ve",
+    "A +ve",
+    "A1 +ve",
+    "B +ve",
+    "B -ve",
+    "AB +ve",
+    "AB -ve",
+    "Others"
+  ];
   var enable = "";
 
   SendUserDataToDB() async {
@@ -55,14 +69,15 @@ class _RegisterMembersState extends State<RegisterMembers> {
       "Name": _NameController.text,
       "PhoneNumber": _PhoneNoController.text,
       "Address": _AddressController.text,
+      "Sex": _sexController.text,
       "DOB": _dobcontroller.text,
-      "Blood": _BloodController.text,
+      "Blood": value == 'Others' ? _BloodController.text : value,
       "Time": DateTime.now(),
       "img": url,
       "id": _CollectionReference.id,
     }).then((value) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text("Details Of The User Has Been Added"),
+        content: Text("Details Of The Members Has Been Added"),
         behavior: SnackBarBehavior.floating,
       ));
       Navigator.of(context).pop();
@@ -145,9 +160,72 @@ class _RegisterMembersState extends State<RegisterMembers> {
                       'Click to add Image',
                       style: TextStyle(fontSize: 11),
                     ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    ListTile(
+                      leading: Icon(
+                        Icons.bloodtype,
+                        color: Colors.red,
+                        size: 40,
+                      ),
+                      title: Container(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                        margin: EdgeInsets.all(3),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(color: Colors.black, width: 1)),
+                        child: DropdownButtonHideUnderline(
+                          child: DropdownButton<String>(
+                              dropdownColor: Colors.white,
+                              hint: Text(
+                                'Select Blood Group',
+                                style:
+                                    TextStyle(fontSize: 17, color: Colors.grey),
+                              ),
+                              value: value,
+                              style: TextStyle(color: Colors.black),
+                              iconSize: 16 * 2,
+                              icon: Icon(
+                                Icons.arrow_drop_down,
+                                color: Colors.black,
+                              ),
+                              items: blood_type.map(buildMenuItem).toList(),
+                              onChanged: (value) => setState(() {
+                                    this.value = value;
+                                  })),
+                        ),
+                      ),
+                    ),
+                    value == 'Others'
+                        ? Padding(
+                            padding: const EdgeInsets.only(
+                                top: 10, right: 8, left: 8, bottom: 10),
+                            child: TextFormField(
+                              controller: _BloodController,
+                              decoration: InputDecoration(
+                                labelText: 'Blood Group',
+                                prefixIcon: Icon(
+                                  Icons.bloodtype,
+                                  color: Colors.redAccent[200],
+                                  size: 40,
+                                ),
+                              ),
+                            ),
+                          )
+                        : Container(),
+                    value == 'Others'
+                        ? Container()
+                        : Divider(
+                            thickness: 0.7,
+                            color: Colors.black,
+                            indent: 8,
+                            endIndent: 8,
+                          ),
                     Padding(
                       padding:
-                          const EdgeInsets.only(right: 8, top: 30, left: 8),
+                          const EdgeInsets.only(right: 8, top: 10, left: 8),
                       child: TextFormField(
                         controller: _NameController,
                         decoration: InputDecoration(
@@ -161,22 +239,7 @@ class _RegisterMembersState extends State<RegisterMembers> {
                       ),
                     ),
                     Padding(
-                      padding:
-                          const EdgeInsets.only(right: 8, top: 30, left: 8),
-                      child: TextFormField(
-                        controller: _BloodController,
-                        decoration: InputDecoration(
-                            labelText: 'Blood Group',
-                            prefixIcon: Icon(
-                              Icons.bloodtype_rounded,
-                              color: Colors.redAccent[200],
-                              size: 40,
-                            ),
-                            hintText: 'Eg: B+ve'),
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(right: 8, top: 20, left: 8),
+                      padding: EdgeInsets.only(right: 8, top: 30, left: 8),
                       child: TextField(
                         controller: _dobcontroller,
                         decoration: InputDecoration(
@@ -199,6 +262,21 @@ class _RegisterMembersState extends State<RegisterMembers> {
                             });
                           }
                         },
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(right: 8, top: 30, left: 8),
+                      child: TextFormField(
+                        controller: _sexController,
+                        decoration: InputDecoration(
+                            labelText: 'Gender',
+                            prefixIcon: Icon(
+                              Icons.person,
+                              color: Colors.redAccent[200],
+                              size: 40,
+                            ),
+                            hintText: 'Eg: Male or Female or Transgender'),
                       ),
                     ),
                     Padding(
@@ -235,40 +313,34 @@ class _RegisterMembersState extends State<RegisterMembers> {
                     Padding(
                       padding:
                           const EdgeInsets.only(right: 8, top: 30.0, left: 8),
-                      child: enable == ""
-                          ? ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.red),
-                              onPressed: () {
-                                if (_NameController.text != "" &&
-                                    _BloodController.text != "" &&
-                                    _PhoneNoController.text != "" &&
-                                    _AddressController.text != "" &&
-                                    file != null) {
-                                  setState(() {
-                                    enable = "1";
-                                  });
-                                  if (file == null) {
-                                    ScaffoldMessenger.of(context)
-                                        .showSnackBar(SnackBar(
-                                      content: Text(
-                                          "Please Select Your profile Photo"),
-                                      behavior: SnackBarBehavior.floating,
-                                      backgroundColor: Colors.black,
-                                    ));
-                                  }
-                                  SendUserDataToDB();
-                                } else {
-                                  ScaffoldMessenger.of(context)
-                                      .showSnackBar(SnackBar(
-                                    content: Text(" Details cannot be empty"),
-                                    behavior: SnackBarBehavior.floating,
-                                    backgroundColor: Colors.black,
-                                  ));
-                                }
-                              },
-                              child: Text('   Submit   '))
-                          : Text("Submitting...."),
+                      child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.red),
+                          onPressed: () {
+                            if (_NameController.text != "" &&
+                                _BloodController.text != "" &&
+                                _PhoneNoController.text != "" &&
+                                _AddressController.text != "") {
+                              if (file == null) {
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(SnackBar(
+                                  content:
+                                      Text("Please Select Your profile Photo"),
+                                  behavior: SnackBarBehavior.floating,
+                                  backgroundColor: Colors.black,
+                                ));
+                              }
+                              SendUserDataToDB();
+                            } else {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(SnackBar(
+                                content: Text(" Details cannot be empty"),
+                                behavior: SnackBarBehavior.floating,
+                                backgroundColor: Colors.black,
+                              ));
+                            }
+                          },
+                          child: Text('   Submit   ')),
                     ),
                   ],
                 ),
@@ -283,4 +355,11 @@ class _RegisterMembersState extends State<RegisterMembers> {
           ),
         ));
   }
+
+  DropdownMenuItem<String> buildMenuItem(String item) => DropdownMenuItem(
+      value: item,
+      child: Text(
+        item,
+        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+      ));
 }
