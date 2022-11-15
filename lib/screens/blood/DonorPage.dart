@@ -57,21 +57,59 @@ class _DonorPageState extends State<DonorPage> {
       ),
       body: SingleChildScrollView(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              child: Column(
-                children: [
-                  Text('Donor Name'),
-                  TextField(
-                    controller: _nameController,
-                  ),
-                  Text("Donor PhNo"),
-                  TextField(
-                    controller: _phoneController,
-                  ),
-                  for (int i = widget.gotReqNo;
-                      i <= (widget.GetingNo - 1) + widget.gotReqNo;
-                      i++)
+            for (int i = widget.gotReqNo, v = widget.gotReqNo;
+                i <= (widget.GetingNo - 1) + widget.gotReqNo;
+                i++)
+              Container(
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 50,
+                    ),
+                    Text(
+                      'Donor Name',
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(left: 25, right: 25),
+                      child: TextField(
+                        decoration: InputDecoration(
+                            hintText: 'Enter Donor Name',
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15))),
+                        controller: _nameController,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 40,
+                    ),
+                    Text(
+                      "Donor Phone Number",
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(left: 25, right: 25),
+                      child: TextField(
+                        decoration: InputDecoration(
+                            hintText: 'Enter Donor Phone Number',
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15))),
+                        controller: _phoneController,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 40,
+                    ),
                     ElevatedButton(
                         onPressed: () {
                           if (_nameController.text != "" &&
@@ -79,12 +117,13 @@ class _DonorPageState extends State<DonorPage> {
                             StoreMessage.collection("Donors")
                                 .doc(widget.email)
                                 .collection("Donors")
-                                .doc("donor $i")
+                                .doc(_nameController.text)
                                 .set({
                               "SI no": (i + 1).toString(),
                               "Name": _nameController.text,
                               "PhNo": _phoneController.text
                             }).then((value) {
+                              print(v);
                               _nameController.clear();
                               _phoneController.clear();
                               if (i + 1 == widget.UnitNo) {
@@ -104,6 +143,7 @@ class _DonorPageState extends State<DonorPage> {
                                       fontSize: 16.0);
                                   Navigator.of(context).pop();
                                   Navigator.of(context).pop();
+                                  Navigator.of(context).pop();
                                 });
                               }
                             });
@@ -118,13 +158,13 @@ class _DonorPageState extends State<DonorPage> {
                                 fontSize: 16.0);
                           }
                         },
-                        child: Text('post Donors ${i + 1} details')),
-                  SizedBox(
-                    height: 15,
-                  )
-                ],
+                        child: Text('Post Donor ${i + 1} details')),
+                    SizedBox(
+                      height: 15,
+                    )
+                  ],
+                ),
               ),
-            ),
           ],
         ),
       ),

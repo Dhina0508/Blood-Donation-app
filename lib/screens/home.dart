@@ -1,3 +1,4 @@
+import 'package:blood_donation/screens/add_user.dart';
 import 'package:blood_donation/screens/blood/BloodDonators.dart';
 import 'package:blood_donation/screens/blood/UserRequest.dart';
 import 'package:blood_donation/screens/blood/blood.dart';
@@ -61,7 +62,7 @@ class _HomeState extends State<Home> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Spacer(
-            flex: 1,
+            flex: 2,
           ),
           Padding(
             padding: EdgeInsets.only(left: 50, right: 50),
@@ -150,6 +151,29 @@ class _HomeState extends State<Home> {
                 onTap: () {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => BloodDonors()));
+                },
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 40,
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: 50, right: 50),
+            child: Card(
+              elevation: 10,
+              child: ListTile(
+                leading: Icon(
+                  Icons.add_business_sharp,
+                  color: Colors.red,
+                ),
+                title: Text(
+                  'Club Members',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => AddUser()));
                 },
               ),
             ),
