@@ -115,6 +115,30 @@ class _MembersState extends State<Members_Page> {
                                 width: 15,
                               ),
                               Text(
+                                "Sex : ",
+                                style: TextStyle(
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.w500,
+                                    fontFamily: 'JosefinSans',
+                                    color: Colors.brown),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(widget.value['Sex'],
+                              style: TextStyle(
+                                  fontSize: 25, fontWeight: FontWeight.bold)),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Row(
+                            children: [
+                              SizedBox(
+                                width: 15,
+                              ),
+                              Text(
                                 "Address : ",
                                 style: TextStyle(
                                     fontSize: 25,
