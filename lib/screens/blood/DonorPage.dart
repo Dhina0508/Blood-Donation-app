@@ -79,7 +79,7 @@ class _DonorPageState extends State<DonorPage> {
                             StoreMessage.collection("Donors")
                                 .doc(widget.email)
                                 .collection("Donors")
-                                .doc(_nameController.text)
+                                .doc("Donors $i")
                                 .set({
                               "SI no": (i + 1).toString(),
                               "Name": _nameController.text,
@@ -102,6 +102,7 @@ class _DonorPageState extends State<DonorPage> {
                                       backgroundColor: Colors.blueGrey,
                                       textColor: Colors.white,
                                       fontSize: 16.0);
+                                  Navigator.of(context).pop();
                                   Navigator.of(context).pop();
                                   Navigator.of(context).pop();
                                 });
