@@ -1,11 +1,13 @@
 import 'dart:io';
 
+import 'package:blood_donation/firebase_helper/firebase_helper.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../bottomnavigation_bar/bottomnavigationbar.dart';
 
@@ -66,6 +68,7 @@ class _MyProfileState extends State<MyProfile> {
   TextEditingController _Professionontroller = new TextEditingController();
   TextEditingController _LocationController = new TextEditingController();
   TextEditingController _NameController = new TextEditingController();
+  Service service = Service();
 
   String? link;
   ImagePicker image = ImagePicker();
@@ -190,6 +193,19 @@ class _MyProfileState extends State<MyProfile> {
     return Scaffold(
         backgroundColor: Color.fromARGB(255, 202, 191, 191),
         appBar: AppBar(
+          actions: [
+            IconButton(
+                onPressed: () async {
+                  service.signOut(context);
+                  SharedPreferences pref =
+                      await SharedPreferences.getInstance();
+                  pref.remove("email");
+                },
+                icon: Icon(
+                  Icons.logout,
+                  color: Colors.black,
+                ))
+          ],
           centerTitle: true,
           backgroundColor: Colors.transparent,
           elevation: 0,
@@ -424,7 +440,7 @@ class _MyProfileState extends State<MyProfile> {
                                     child: CircleAvatar(
                                       backgroundColor: Colors.white,
                                       backgroundImage: file == null
-                                          ? AssetImage("images/profile1.png")
+                                          ? AssetImage("images/profile.png")
                                           : FileImage(File(file!.path))
                                               as ImageProvider,
                                       radius: 70,

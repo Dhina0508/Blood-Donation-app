@@ -1,7 +1,9 @@
 import 'package:blood_donation/admin/adminBloodProfile.dart';
+import 'package:blood_donation/firebase_helper/firebase_helper.dart';
 import 'package:blood_donation/screens/blood/blood_profile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AdminDashboard extends StatefulWidget {
   const AdminDashboard({super.key});
@@ -11,10 +13,23 @@ class AdminDashboard extends StatefulWidget {
 }
 
 class _AdminDashboardState extends State<AdminDashboard> {
+  Service service = Service();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(
+              onPressed: () async {
+                service.signOut(context);
+                SharedPreferences pref = await SharedPreferences.getInstance();
+                pref.remove("email");
+              },
+              icon: Icon(
+                Icons.logout,
+                color: Colors.black,
+              ))
+        ],
         title: Text('Welcome Admin'),
         backgroundColor: Colors.red,
       ),
