@@ -496,6 +496,8 @@ class _bloodprofState extends State<bloodprof> {
                                   ],
                                 )
                               : ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.red),
                                   onPressed: () {
                                     final docUser = FirebaseFirestore.instance
                                         .collection("Blood_Wait_list")

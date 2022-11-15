@@ -27,7 +27,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
               },
               icon: Icon(
                 Icons.logout,
-                color: Colors.black,
+                color: Colors.white,
               ))
         ],
         title: Text('Welcome Admin'),

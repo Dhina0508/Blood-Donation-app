@@ -94,7 +94,7 @@ class _HomeState extends State<Home> {
               elevation: 10,
               child: ListTile(
                 leading: Icon(
-                  Icons.bloodtype_outlined,
+                  Icons.add,
                   color: Colors.red,
                 ),
                 title: Text(
