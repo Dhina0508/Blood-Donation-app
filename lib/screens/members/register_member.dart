@@ -318,9 +318,11 @@ class _RegisterMembersState extends State<RegisterMembers> {
                               backgroundColor: Colors.red),
                           onPressed: () {
                             if (_NameController.text != "" &&
-                                _BloodController.text != "" &&
                                 _PhoneNoController.text != "" &&
-                                _AddressController.text != "") {
+                                _AddressController.text != "" &&
+                                _sexController.text != "" &&
+                                (_BloodController.text != "" || value != "") &&
+                                file != null) {
                               if (file == null) {
                                 ScaffoldMessenger.of(context)
                                     .showSnackBar(SnackBar(
