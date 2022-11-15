@@ -37,6 +37,7 @@ class _RegisterMembersState extends State<RegisterMembers> {
 
   TextEditingController _BloodController = TextEditingController();
   TextEditingController _dobcontroller = TextEditingController();
+  var enable = "";
 
   SendUserDataToDB() async {
     final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -48,9 +49,9 @@ class _RegisterMembersState extends State<RegisterMembers> {
     TaskSnapshot snapshot = await task;
     url = await snapshot.ref.getDownloadURL();
 
-    CollectionReference _CollectionReference =
-        FirebaseFirestore.instance.collection("Members_Details");
-    return _CollectionReference.doc().set({
+    final _CollectionReference =
+        FirebaseFirestore.instance.collection("Members_Details").doc();
+    return _CollectionReference.set({
       "Name": _NameController.text,
       "PhoneNumber": _PhoneNoController.text,
       "Address": _AddressController.text,
@@ -58,6 +59,7 @@ class _RegisterMembersState extends State<RegisterMembers> {
       "Blood": _BloodController.text,
       "Time": DateTime.now(),
       "img": url,
+      "id": _CollectionReference.id,
     }).then((value) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text("Details Of The User Has Been Added"),
@@ -233,34 +235,40 @@ class _RegisterMembersState extends State<RegisterMembers> {
                     Padding(
                       padding:
                           const EdgeInsets.only(right: 8, top: 30.0, left: 8),
-                      child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.red),
-                          onPressed: () {
-                            if (_NameController.text != "" &&
-                                _BloodController.text != "" &&
-                                _PhoneNoController.text != "" &&
-                                _AddressController.text != "") {
-                              if (file == null) {
-                                ScaffoldMessenger.of(context)
-                                    .showSnackBar(SnackBar(
-                                  content:
-                                      Text("Please Select Your profile Photo"),
-                                  behavior: SnackBarBehavior.floating,
-                                  backgroundColor: Colors.black,
-                                ));
-                              }
-                              SendUserDataToDB();
-                            } else {
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(SnackBar(
-                                content: Text(" Details cannot be empty"),
-                                behavior: SnackBarBehavior.floating,
-                                backgroundColor: Colors.black,
-                              ));
-                            }
-                          },
-                          child: Text('   Submit   ')),
+                      child: enable == ""
+                          ? ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.red),
+                              onPressed: () {
+                                if (_NameController.text != "" &&
+                                    _BloodController.text != "" &&
+                                    _PhoneNoController.text != "" &&
+                                    _AddressController.text != "" &&
+                                    file != null) {
+                                  setState(() {
+                                    enable = "1";
+                                  });
+                                  if (file == null) {
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(SnackBar(
+                                      content: Text(
+                                          "Please Select Your profile Photo"),
+                                      behavior: SnackBarBehavior.floating,
+                                      backgroundColor: Colors.black,
+                                    ));
+                                  }
+                                  SendUserDataToDB();
+                                } else {
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(SnackBar(
+                                    content: Text(" Details cannot be empty"),
+                                    behavior: SnackBarBehavior.floating,
+                                    backgroundColor: Colors.black,
+                                  ));
+                                }
+                              },
+                              child: Text('   Submit   '))
+                          : Text("Submitting...."),
                     ),
                   ],
                 ),
