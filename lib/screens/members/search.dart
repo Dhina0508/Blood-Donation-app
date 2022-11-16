@@ -50,9 +50,14 @@ class _SearchState extends State<Search> {
                               String ItemTitle =
                                   snapshot.data?.docs[index]['Name'];
                               String image = snapshot.data?.docs[index]['img'];
+                              String Group =
+                                  snapshot.data?.docs[index]['Blood'];
+                              String Area = snapshot.data?.docs[index]['Area'];
                               return CardItem(
                                 ItemTitle: ItemTitle,
                                 image: image,
+                                group: Group,
+                                Area: Area,
                               );
                             });
                       }))
@@ -67,7 +72,9 @@ class _SearchState extends State<Search> {
 class CardItem extends StatefulWidget {
   String? ItemTitle;
   String? image;
-  CardItem({this.ItemTitle, this.image});
+  String? group;
+  String? Area;
+  CardItem({this.ItemTitle, this.image, this.group, this.Area});
 
   @override
   State<CardItem> createState() => _CardItemState();
@@ -83,7 +90,14 @@ class _CardItemState extends State<CardItem> {
         child: ListTile(
           title: Text(widget.ItemTitle!),
           leading: Image.network(widget.image!),
-          trailing: Text('price'),
+          trailing: Text(
+            widget.group!,
+            style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+          ),
+          subtitle: Text(
+            "Area :" + widget.Area!,
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
           onTap: () => [],
         ),
       ),

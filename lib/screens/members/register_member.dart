@@ -38,6 +38,9 @@ class _RegisterMembersState extends State<RegisterMembers> {
 
   TextEditingController _BloodController = TextEditingController();
   TextEditingController _dobcontroller = TextEditingController();
+
+  TextEditingController _Areacontroller = TextEditingController();
+
   String? value;
 
   final blood_type = [
@@ -75,6 +78,7 @@ class _RegisterMembersState extends State<RegisterMembers> {
       "Time": DateTime.now(),
       "img": url,
       "id": _CollectionReference.id,
+      "Area": _AddressController.text,
     }).then((value) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text("Details Of The Members Has Been Added"),
@@ -312,6 +316,21 @@ class _RegisterMembersState extends State<RegisterMembers> {
                       ),
                     ),
                     Padding(
+                      padding:
+                          const EdgeInsets.only(right: 8, top: 30, left: 8),
+                      child: TextFormField(
+                        controller: _Areacontroller,
+                        decoration: InputDecoration(
+                            labelText: 'Address',
+                            prefixIcon: Icon(
+                              Icons.maps_home_work_rounded,
+                              color: Colors.redAccent[200],
+                              size: 40,
+                            ),
+                            hintText: 'Koyembedu'),
+                      ),
+                    ),
+                    Padding(
                         padding:
                             const EdgeInsets.only(right: 8, top: 30.0, left: 8),
                         child: enable == ""
@@ -321,6 +340,7 @@ class _RegisterMembersState extends State<RegisterMembers> {
                                 onPressed: () {
                                   if (_NameController.text != "" &&
                                       _PhoneNoController.text != "" &&
+                                      _Areacontroller.text != "" &&
                                       _AddressController.text != "" &&
                                       _sexController.text != "" &&
                                       (_BloodController.text != "" ||
