@@ -78,7 +78,7 @@ class _RegisterMembersState extends State<RegisterMembers> {
       "Time": DateTime.now(),
       "img": url,
       "id": _CollectionReference.id,
-      "Area": _AddressController.text,
+      "Area": _Areacontroller.text,
     }).then((value) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text("Details Of The Members Has Been Added"),

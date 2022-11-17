@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Search extends StatefulWidget {
   const Search({super.key});
@@ -35,7 +36,7 @@ class _SearchState extends State<Search> {
                   child: StreamBuilder(
                       stream: FirebaseFirestore.instance
                           .collection('Members_Details')
-                          .where("Blood", isEqualTo: _InputText)
+                          .where('Blood', isEqualTo: _InputText)
                           .snapshots(),
                       builder: (BuildContext context,
                           AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -53,6 +54,8 @@ class _SearchState extends State<Search> {
                               String Group =
                                   snapshot.data?.docs[index]['Blood'];
                               String Area = snapshot.data?.docs[index]['Area'];
+                              String Phno =
+                                  snapshot.data?.docs[index]['PhoneNumber'];
                               return CardItem(
                                 ItemTitle: ItemTitle,
                                 image: image,
@@ -74,7 +77,8 @@ class CardItem extends StatefulWidget {
   String? image;
   String? group;
   String? Area;
-  CardItem({this.ItemTitle, this.image, this.group, this.Area});
+  String? PhNo;
+  CardItem({this.ItemTitle, this.image, this.group, this.Area, this.PhNo});
 
   @override
   State<CardItem> createState() => _CardItemState();
@@ -98,7 +102,10 @@ class _CardItemState extends State<CardItem> {
             "Area :" + widget.Area!,
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
-          onTap: () => [],
+          onTap: () {
+            final number = widget.PhNo;
+            launch('tel:$number');
+          },
         ),
       ),
     );
