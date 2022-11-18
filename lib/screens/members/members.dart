@@ -13,6 +13,10 @@ class _MembersState extends State<Members_Page> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.value['Name']),
+        backgroundColor: Colors.red,
+      ),
       body: Stack(children: [
         Center(
             child: Image.asset(

@@ -46,6 +46,7 @@ class _bloodprofState extends State<bloodprof> {
                       gotReqNo: gotUnits,
                       GetingNo: units,
                       id: widget.value['id'],
+                      blood: widget.value['Blood_Group'],
                       val: val,
                     )));
       else {
@@ -482,7 +483,9 @@ class _bloodprofState extends State<bloodprof> {
                                                         Text("We have " +
                                                             widget.value[
                                                                 'GotUnits'] +
-                                                            " units."),
+                                                            "/" +
+                                                            widget.value[
+                                                                'units']),
                                                         TextField(
                                                           controller: _Units,
                                                           keyboardType:
