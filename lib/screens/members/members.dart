@@ -16,8 +16,8 @@ class _MembersState extends State<Members_Page> {
       body: Stack(children: [
         Center(
             child: Image.asset(
-          'images/blood.png',
-          color: Colors.white.withOpacity(0.2),
+          'images/hand1.png',
+          color: Colors.white.withOpacity(0.1),
           colorBlendMode: BlendMode.modulate,
         )),
         SafeArea(child: LayoutBuilder(builder:
@@ -159,7 +159,12 @@ class _MembersState extends State<Members_Page> {
                           SizedBox(
                             height: 20,
                           ),
+                          Spacer(),
                           ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10)),
+                                  backgroundColor: Colors.red),
                               onPressed: () {
                                 final docUser = FirebaseFirestore.instance
                                     .collection("Members_Details")
@@ -167,7 +172,8 @@ class _MembersState extends State<Members_Page> {
                                 docUser.delete();
                                 Navigator.of(context).pop();
                               },
-                              child: Text('Remove Person'))
+                              child: Text('Remove Person')),
+                          Spacer(),
                         ],
                       ),
                     ),

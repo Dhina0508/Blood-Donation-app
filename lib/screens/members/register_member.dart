@@ -323,15 +323,6 @@ class _RegisterMembersState extends State<RegisterMembers> {
                                 _sexController.text != "" &&
                                 (_BloodController.text != "" || value != "") &&
                                 file != null) {
-                              if (file == null) {
-                                ScaffoldMessenger.of(context)
-                                    .showSnackBar(SnackBar(
-                                  content:
-                                      Text("Please Select Your profile Photo"),
-                                  behavior: SnackBarBehavior.floating,
-                                  backgroundColor: Colors.black,
-                                ));
-                              }
                               SendUserDataToDB();
                             } else {
                               ScaffoldMessenger.of(context)
