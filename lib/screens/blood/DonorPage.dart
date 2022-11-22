@@ -94,7 +94,7 @@ class _DonorPageState extends State<DonorPage> {
                         borderRadius: BorderRadius.circular(10)),
                     child: Center(
                       child: Text(
-                        'Donate From our Members',
+                        'Donate From Our Members',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
@@ -125,7 +125,7 @@ class _DonorPageState extends State<DonorPage> {
                         borderRadius: BorderRadius.circular(10)),
                     child: Center(
                       child: Text(
-                        "Donate from other members",
+                        "Donate From Other Members",
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
@@ -185,6 +185,26 @@ class _MyWidgetState extends State<post> {
       Navigator.of(context).pop();
       Navigator.of(context).pop();
       Navigator.of(context).pop();
+    });
+  }
+
+  RemoveRequest(@required id) async {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    CollectionReference _CollectionReference =
+        FirebaseFirestore.instance.collection("Blood_Wait_list");
+    return _CollectionReference.doc(id)
+        .update({"Status": "Completed", "user": ""}).then((value) {
+      Navigator.of(context).pop();
+      Navigator.of(context).pop();
+      Navigator.of(context).pop();
+      Fluttertoast.showToast(
+          msg: "Thanks For Your Effort",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.blueGrey,
+          textColor: Colors.white,
+          fontSize: 16.0);
     });
   }
 
@@ -252,7 +272,7 @@ class _MyWidgetState extends State<post> {
                   _nameController.clear();
                   _phoneController.clear();
                   if (widget.i + 1 == widget.UnitNo) {
-                    DeleteUser(widget.id);
+                    RemoveRequest(widget.id);
                   } else if (widget.i ==
                       (widget.GetingNo - 1) + widget.gotReqNo) {
                     _CollectionReference.doc(widget.id).update(
@@ -265,6 +285,7 @@ class _MyWidgetState extends State<post> {
                           backgroundColor: Colors.blueGrey,
                           textColor: Colors.white,
                           fontSize: 16.0);
+                      Navigator.of(context).pop();
                       Navigator.of(context).pop();
                       Navigator.of(context).pop();
                       Navigator.of(context).pop();

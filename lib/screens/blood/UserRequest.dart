@@ -81,6 +81,12 @@ class _MyRequestState extends State<MyRequest> {
                                   size: 18,
                                   color: Colors.red,
                                 )
+                              else if (x['Status'] == "Completed")
+                                Icon(
+                                  Icons.check_circle_outline_rounded,
+                                  size: 18,
+                                  color: Colors.green,
+                                )
                             ],
                           ),
                         ),

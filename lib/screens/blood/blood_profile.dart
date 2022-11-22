@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class bloodprof extends StatefulWidget {
   var value;
@@ -106,7 +107,7 @@ class _bloodprofState extends State<bloodprof> {
                       child: Column(
                         children: [
                           SizedBox(
-                            height: 35,
+                            height: 15,
                           ),
                           Row(
                             children: [
@@ -329,9 +330,6 @@ class _bloodprofState extends State<bloodprof> {
                           SizedBox(
                             height: 20,
                           ),
-                          SizedBox(
-                            height: 20,
-                          ),
                           Row(
                             children: [
                               SizedBox(
@@ -350,13 +348,10 @@ class _bloodprofState extends State<bloodprof> {
                           SizedBox(
                             height: 10,
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              widget.value['discription'],
-                              style: TextStyle(
-                                  fontSize: 25, fontWeight: FontWeight.bold),
-                            ),
+                          Text(
+                            widget.value['discription'],
+                            style: TextStyle(
+                                fontSize: 25, fontWeight: FontWeight.bold),
                           ),
                           SizedBox(
                             height: 20,
@@ -451,10 +446,16 @@ class _bloodprofState extends State<bloodprof> {
                           SizedBox(
                             height: 10,
                           ),
-                          Text(
-                            widget.value['PhoneNumber'],
-                            style: TextStyle(
-                                fontSize: 25, fontWeight: FontWeight.bold),
+                          GestureDetector(
+                            onTap: () {
+                              final number = widget.value['PhoneNumber'];
+                              launch('tel:$number');
+                            },
+                            child: Text(
+                              widget.value['PhoneNumber'],
+                              style: TextStyle(
+                                  fontSize: 25, fontWeight: FontWeight.bold),
+                            ),
                           ),
                           SizedBox(
                             height: 20,

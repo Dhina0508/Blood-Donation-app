@@ -57,6 +57,23 @@ class _Member_DonorState extends State<Member_Donor> {
     });
   }
 
+  RemoveRequest(@required id) async {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    CollectionReference _CollectionReference =
+        FirebaseFirestore.instance.collection("Blood_Wait_list");
+    return _CollectionReference.doc(id)
+        .update({"Status": "Completed", "user": ""}).then((value) {
+      Fluttertoast.showToast(
+          msg: "Thanks For Your Effort",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.blueGrey,
+          textColor: Colors.white,
+          fontSize: 16.0);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -140,7 +157,7 @@ class _Member_DonorState extends State<Member_Donor> {
                                           if (widget.GetingNo == 0) {
                                             if (widget.gotReqNo ==
                                                 widget.UnitNo) {
-                                              DeleteRequest(widget.id);
+                                              RemoveRequest(widget.id);
                                             }
                                           }
                                         });
