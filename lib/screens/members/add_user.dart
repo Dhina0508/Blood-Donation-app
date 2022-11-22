@@ -164,10 +164,12 @@ class _AddUserState extends State<AddUser> {
                                 itemBuilder: (context, i) {
                                   QueryDocumentSnapshot x =
                                       snapshot.data!.docs[i];
-                                  if (x['Status'] == "Donated" &&
-                                      x['admin'] ==
-                                          FirebaseAuth
-                                              .instance.currentUser!.email) {
+                                  if (x['Status'] == "Donated"
+                                      //  &&
+                                      //     x['admin'] ==
+                                      //         FirebaseAuth
+                                      //             .instance.currentUser!.email
+                                      ) {
                                     return Card(
                                       elevation: 5,
                                       child: ListTile(
