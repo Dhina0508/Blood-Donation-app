@@ -19,7 +19,7 @@ class _profileState extends State<blood> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Blood Requests'),
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.redAccent,
       ),
       body: Center(
         child: StreamBuilder<QuerySnapshot>(
@@ -67,7 +67,7 @@ class _profileState extends State<blood> {
       ),
       floatingActionButton: FloatingActionButton(
           child: Icon(Icons.add),
-          backgroundColor: Colors.red,
+          backgroundColor: Colors.redAccent,
           onPressed: () {
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => bloodreg()));

@@ -27,7 +27,8 @@ class _BottomNavigatorBarState extends State<BottomNavigatorBar> {
         unselectedFontSize: 12,
         unselectedItemColor: Colors.black,
         selectedItemColor: Colors.red,
-        backgroundColor: Color.fromARGB(255, 202, 191, 191),
+        backgroundColor: Color.fromARGB(154, 189, 132, 132),
+        elevation: 0,
         showUnselectedLabels: false,
         items: [
           BottomNavigationBarItem(
@@ -41,7 +42,7 @@ class _BottomNavigatorBarState extends State<BottomNavigatorBar> {
               backgroundColor: Colors.red),
           BottomNavigationBarItem(
               icon: Icon(Icons.person),
-              label: 'My Profile',
+              label: 'Profile',
               backgroundColor: Colors.green),
         ],
         onTap: (index) {

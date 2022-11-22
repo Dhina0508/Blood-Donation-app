@@ -141,13 +141,6 @@ class _RegisterMembersState extends State<RegisterMembers> {
                     SizedBox(
                       height: 20,
                     ),
-                    Text(
-                      'Submit to Store Details',
-                      style: TextStyle(
-                          fontSize: 30,
-                          color: Colors.redAccent[200],
-                          fontWeight: FontWeight.bold),
-                    ),
                     SizedBox(
                       height: 20,
                     ),
@@ -318,21 +311,6 @@ class _RegisterMembersState extends State<RegisterMembers> {
                       ),
                     ),
                     Padding(
-                      padding:
-                          const EdgeInsets.only(right: 8, top: 30, left: 8),
-                      child: TextFormField(
-                        controller: _Areacontroller,
-                        decoration: InputDecoration(
-                            labelText: 'Address',
-                            prefixIcon: Icon(
-                              Icons.maps_home_work_rounded,
-                              color: Colors.redAccent[200],
-                              size: 40,
-                            ),
-                            hintText: 'Koyembedu'),
-                      ),
-                    ),
-                    Padding(
                         padding:
                             const EdgeInsets.only(right: 8, top: 30.0, left: 8),
                         child: enable == ""
@@ -342,7 +320,6 @@ class _RegisterMembersState extends State<RegisterMembers> {
                                 onPressed: () {
                                   if (_NameController.text != "" &&
                                       _PhoneNoController.text != "" &&
-                                      _Areacontroller.text != "" &&
                                       _AddressController.text != "" &&
                                       _sexController.text != "" &&
                                       (_BloodController.text != "" ||

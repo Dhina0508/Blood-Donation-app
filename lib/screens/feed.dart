@@ -14,7 +14,7 @@ class _FeedState extends State<Feed> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 202, 191, 191),
+      backgroundColor: Color.fromARGB(154, 189, 132, 132),
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         automaticallyImplyLeading: false,

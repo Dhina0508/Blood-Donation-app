@@ -191,7 +191,7 @@ class _MyProfileState extends State<MyProfile> {
         FirebaseFirestore.instance.collection("User_Bio_Data");
 
     return Scaffold(
-        backgroundColor: Color.fromARGB(255, 202, 191, 191),
+        backgroundColor: Color.fromARGB(154, 189, 132, 132),
         appBar: AppBar(
           actions: [
             IconButton(

@@ -71,37 +71,66 @@ class _DonorPageState extends State<DonorPage> {
                 SizedBox(
                   height: 25,
                 ),
-                ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: ((context) => Member_Donor(
-                                    GetingNo: widget.GetingNo,
-                                    UnitNo: widget.UnitNo,
-                                    email: widget.email,
-                                    gotReqNo: widget.gotReqNo,
-                                    id: widget.id,
-                                    val: widget.val,
-                                    blood: widget.blood,
-                                  ))));
-                    },
-                    child: Text('Donate From our Members')),
-                ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => OtherDonor(
-                                    GetingNo: widget.GetingNo,
-                                    UnitNo: widget.UnitNo,
-                                    email: widget.email,
-                                    gotReqNo: widget.gotReqNo,
-                                    id: widget.id,
-                                    val: widget.val,
-                                  )));
-                    },
-                    child: Text("Donate from other members")),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: ((context) => Member_Donor(
+                                  GetingNo: widget.GetingNo,
+                                  UnitNo: widget.UnitNo,
+                                  email: widget.email,
+                                  gotReqNo: widget.gotReqNo,
+                                  id: widget.id,
+                                  val: widget.val,
+                                  blood: widget.blood,
+                                ))));
+                  },
+                  child: Container(
+                    width: 200,
+                    height: 60,
+                    decoration: BoxDecoration(
+                        color: Colors.red.shade200,
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Center(
+                      child: Text(
+                        'Donate From our Members',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 50,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => OtherDonor(
+                                  GetingNo: widget.GetingNo,
+                                  UnitNo: widget.UnitNo,
+                                  email: widget.email,
+                                  gotReqNo: widget.gotReqNo,
+                                  id: widget.id,
+                                  val: widget.val,
+                                )));
+                  },
+                  child: Container(
+                    width: 200,
+                    height: 60,
+                    decoration: BoxDecoration(
+                        color: Colors.red.shade200,
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Center(
+                      child: Text(
+                        "Donate from other members",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                )
               ],
             ),
           ),
@@ -207,6 +236,7 @@ class _MyWidgetState extends State<post> {
           height: 40,
         ),
         ElevatedButton(
+            style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
             onPressed: () {
               if (_nameController.text != "" && _phoneController.text != "") {
                 StoreMessage.collection("Donors")
@@ -253,7 +283,7 @@ class _MyWidgetState extends State<post> {
                     fontSize: 16.0);
               }
             },
-            child: Text('Post Donor ${widget.i + 1} details')),
+            child: Text('Post ${widget.i + 1} Donors Details')),
         SizedBox(
           height: 15,
         )

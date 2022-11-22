@@ -34,7 +34,7 @@ class _BloodDonorsState extends State<BloodDonors> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Donor List'),
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.redAccent,
       ),
       body: SafeArea(
           child: StreamBuilder(
@@ -103,11 +103,6 @@ class _BloodDonorsState extends State<BloodDonors> {
           return Container();
         },
       )),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        backgroundColor: Colors.red,
-        child: Icon(Icons.restore_from_trash_sharp),
-      ),
     );
   }
 }

@@ -29,7 +29,7 @@ class _OtherDonorState extends State<OtherDonor> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Add Donors'),
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.redAccent,
       ),
       body: SingleChildScrollView(
         child: Column(

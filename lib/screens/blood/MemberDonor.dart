@@ -47,7 +47,13 @@ class _Member_DonorState extends State<Member_Donor> {
         FirebaseFirestore.instance.collection("Members_Details");
     return _CollectionReference.doc(id)
         .update({"Status": "Donated"}).then((value) {
-      Navigator.of(context).pop();
+      if (widget.GetingNo == 0) {
+        Navigator.of(context).pop();
+        Navigator.of(context).pop();
+        Navigator.of(context).pop();
+
+        Navigator.of(context).pop();
+      }
     });
   }
 
@@ -56,14 +62,10 @@ class _Member_DonorState extends State<Member_Donor> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Add Members' + " (" + widget.GetingNo.toString() + ")"),
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.redAccent,
       ),
       body: Column(
         children: [
-          Text(
-            'Select ' + widget.GetingNo.toString(),
-            style: TextStyle(fontSize: 24),
-          ),
           Flexible(
             child: StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instance
@@ -80,8 +82,8 @@ class _Member_DonorState extends State<Member_Donor> {
                         QueryDocumentSnapshot x = snapshot.data!.docs[i];
                         print(widget.blood);
                         if (widget.blood == x['Blood'] &&
-                            // x['admin'] ==
-                            //     FirebaseAuth.instance.currentUser!.email &&
+                            x['admin'] ==
+                                FirebaseAuth.instance.currentUser!.email &&
                             x['Status'] == "Not_Donated") {
                           return Card(
                             elevation: 5,
@@ -140,10 +142,6 @@ class _Member_DonorState extends State<Member_Donor> {
                                                 widget.UnitNo) {
                                               DeleteRequest(widget.id);
                                             }
-
-                                            Navigator.of(context).pop();
-                                            Navigator.of(context).pop();
-                                            Navigator.of(context).pop();
                                           }
                                         });
                                       },

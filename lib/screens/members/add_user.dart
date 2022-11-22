@@ -28,7 +28,7 @@ class _AddUserState extends State<AddUser> {
           title: Text(
             'Members',
           ),
-          backgroundColor: Colors.red,
+          backgroundColor: Colors.redAccent,
           centerTitle: true,
           elevation: 0,
           actions: [
@@ -56,7 +56,7 @@ class _AddUserState extends State<AddUser> {
             SizedBox(
               height: 50,
               child: AppBar(
-                backgroundColor: Colors.red,
+                backgroundColor: Colors.redAccent,
                 bottom: TabBar(
                   tabs: [
                     Tab(
@@ -91,10 +91,9 @@ class _AddUserState extends State<AddUser> {
                                 itemBuilder: (context, i) {
                                   QueryDocumentSnapshot x =
                                       snapshot.data!.docs[i];
-                                  if (
-                                      // x['admin'] ==
-                                      //       FirebaseAuth
-                                      //           .instance.currentUser!.email &&
+                                  if (x['admin'] ==
+                                          FirebaseAuth
+                                              .instance.currentUser!.email &&
                                       x['Status'] == "Not_Donated") {
                                     return Card(
                                       elevation: 5,
@@ -164,12 +163,10 @@ class _AddUserState extends State<AddUser> {
                                 itemBuilder: (context, i) {
                                   QueryDocumentSnapshot x =
                                       snapshot.data!.docs[i];
-                                  if (x['Status'] == "Donated"
-                                      //  &&
-                                      //     x['admin'] ==
-                                      //         FirebaseAuth
-                                      //             .instance.currentUser!.email
-                                      ) {
+                                  if (x['Status'] == "Donated" &&
+                                      x['admin'] ==
+                                          FirebaseAuth
+                                              .instance.currentUser!.email) {
                                     return Card(
                                       elevation: 5,
                                       child: ListTile(
@@ -198,9 +195,12 @@ class _AddUserState extends State<AddUser> {
                                                   AcceptRequest(x['id']);
                                                 },
                                                 icon: Icon(
-                                                  Icons.done,
+                                                  Icons.add_box_sharp,
                                                   color: Colors.green,
                                                 )),
+                                            SizedBox(
+                                              width: 5,
+                                            ),
                                             Text(
                                               x['Blood'],
                                               style: TextStyle(

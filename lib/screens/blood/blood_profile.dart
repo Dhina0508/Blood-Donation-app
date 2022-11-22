@@ -90,7 +90,7 @@ class _bloodprofState extends State<bloodprof> {
         Center(
             child: Image.asset(
           'images/blood.png',
-          color: Colors.white.withOpacity(0.2),
+          color: Colors.white.withOpacity(0.1),
           colorBlendMode: BlendMode.modulate,
         )),
         SafeArea(child: LayoutBuilder(builder:
@@ -468,6 +468,8 @@ class _bloodprofState extends State<bloodprof> {
                                     Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                            backgroundColor: Colors.green),
                                         onPressed: () {
                                           showDialog(
                                               context: context,
@@ -523,7 +525,7 @@ class _bloodprofState extends State<bloodprof> {
                                           children: [
                                             Icon(
                                               Icons.done,
-                                              color: Colors.green,
+                                              color: Colors.white,
                                             ),
                                             SizedBox(
                                               width: 10,
@@ -544,6 +546,8 @@ class _bloodprofState extends State<bloodprof> {
                                     Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                            backgroundColor: Colors.redAccent),
                                         onPressed: () {
                                           Navigator.of(context).pop();
                                         },
@@ -551,13 +555,13 @@ class _bloodprofState extends State<bloodprof> {
                                           children: [
                                             Icon(
                                               Icons.not_interested_rounded,
-                                              color: Colors.red,
+                                              color: Colors.white,
                                             ),
                                             SizedBox(
                                               width: 10,
                                             ),
                                             Text(
-                                              'Nope  ',
+                                              'Ignore  ',
                                               style: TextStyle(
                                                   color: Colors.white,
                                                   fontWeight: FontWeight.bold,

@@ -16,7 +16,7 @@ class _MyRequestState extends State<MyRequest> {
     return Scaffold(
       appBar: AppBar(
         title: Text('My Request List'),
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.redAccent,
       ),
       body: Center(
         child: StreamBuilder<QuerySnapshot>(

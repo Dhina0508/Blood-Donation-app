@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:blood_donation/admin/adminDashboard.dart';
 import 'package:blood_donation/bottomnavigation_bar/bottomnavigationbar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -68,8 +69,8 @@ class _registerState extends State<register> {
         behavior: SnackBarBehavior.floating,
       ));
       Navigator.of(context).pop();
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) => BottomNavigatorBar()));
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => AdminDashboard()));
     }).catchError((onError) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text("ERROR ${onError.toString()}"),
@@ -92,7 +93,7 @@ class _registerState extends State<register> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                'Bio of the User',
+                'Bio of the New User',
                 style: TextStyle(
                   color: Colors.white,
                 ),
@@ -120,20 +121,6 @@ class _registerState extends State<register> {
                   children: [
                     SizedBox(
                       height: 20,
-                    ),
-                    Text(
-                      'Submit to continue',
-                      style: TextStyle(
-                          fontSize: 30,
-                          color: Colors.redAccent[200],
-                          fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      'We will not share this with anyone',
-                      style: TextStyle(fontSize: 16.0, color: Colors.grey),
                     ),
                     SizedBox(
                       height: 20,
@@ -276,8 +263,7 @@ class _registerState extends State<register> {
                               if (file == null) {
                                 ScaffoldMessenger.of(context)
                                     .showSnackBar(SnackBar(
-                                  content:
-                                      Text("Please Select Your profile Photo"),
+                                  content: Text("Please Select profile Photo"),
                                   behavior: SnackBarBehavior.floating,
                                   backgroundColor: Colors.black,
                                 ));
@@ -307,5 +293,4 @@ class _registerState extends State<register> {
           ),
         ));
   }
-  
 }

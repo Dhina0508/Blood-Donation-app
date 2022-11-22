@@ -12,7 +12,18 @@ class Search extends StatefulWidget {
 }
 
 class _SearchState extends State<Search> {
-  var _InputText = "";
+  final blood_type = [
+    "O +ve",
+    "O -ve",
+    "A +ve",
+    "A1 +ve",
+    "B +ve",
+    "B -ve",
+    "AB +ve",
+    "AB -ve",
+  ];
+  String? _InputText;
+  // var _InputText = "";
   String blood = "";
   var _InputAddress = "";
   String Address = "";
@@ -20,6 +31,7 @@ class _SearchState extends State<Search> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.redAccent,
         title: Text('Search Details'),
       ),
       body: SafeArea(
@@ -27,12 +39,43 @@ class _SearchState extends State<Search> {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-              TextFormField(
-                onChanged: ((value) {
-                  setState(() {
-                    _InputText = value;
-                  });
-                }),
+              // TextFormField(
+              //   onChanged: ((value) {
+              //     setState(() {
+              //       _InputText = value;
+              //     });
+              //   }),
+              //   decoration: InputDecoration(
+              //       hintText: 'Search by Blood Group',
+              //       suffixIcon: Icon(Icons.search)),
+              // ),
+              ListTile(
+                title: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                  margin: EdgeInsets.all(3),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: Colors.black, width: 1)),
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButton<String>(
+                        dropdownColor: Colors.white,
+                        hint: Text(
+                          'Select Blood Group',
+                          style: TextStyle(fontSize: 17, color: Colors.grey),
+                        ),
+                        value: _InputText,
+                        style: TextStyle(color: Colors.black),
+                        iconSize: 16 * 2,
+                        icon: Icon(
+                          Icons.arrow_drop_down,
+                          color: Colors.black,
+                        ),
+                        items: blood_type.map(buildMenuItem).toList(),
+                        onChanged: (value) => setState(() {
+                              this._InputText = value;
+                            })),
+                  ),
+                ),
               ),
               Expanded(
                   child: StreamBuilder(
@@ -78,6 +121,13 @@ class _SearchState extends State<Search> {
       ),
     );
   }
+
+  DropdownMenuItem<String> buildMenuItem(String _InputText) => DropdownMenuItem(
+      value: _InputText,
+      child: Text(
+        _InputText,
+        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+      ));
 }
 
 class CardItem extends StatefulWidget {

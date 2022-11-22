@@ -42,27 +42,13 @@ class _SignUpState extends State<SignUp> {
                 child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Ink(
-                  child: Container(
-                    padding: EdgeInsets.all(7),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      gradient: LinearGradient(colors: [
-                        Color.fromARGB(210, 240, 23, 23),
-                        Color.fromARGB(210, 234, 161, 161),
-                        Color.fromARGB(210, 211, 199, 199),
-                        Color.fromARGB(210, 52, 47, 47),
-                      ], begin: Alignment.topLeft, end: Alignment.bottomRight),
-                    ),
-                    child: Text(
-                      'BLOOD DONATION',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'Cinzel',
-                          fontWeight: FontWeight.bold,
-                          fontSize: 30),
-                    ),
-                  ),
+                Text(
+                  'Register New User',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: 'Cinzel',
+                      fontWeight: FontWeight.bold,
+                      fontSize: 30),
                 ),
                 SizedBox(
                   height: 75,

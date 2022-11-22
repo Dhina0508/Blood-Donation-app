@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Members_Page extends StatefulWidget {
   var value;
@@ -107,9 +108,15 @@ class _MembersState extends State<Members_Page> {
                           SizedBox(
                             height: 10,
                           ),
-                          Text(widget.value['PhoneNumber'],
-                              style: TextStyle(
-                                  fontSize: 25, fontWeight: FontWeight.bold)),
+                          GestureDetector(
+                            child: Text(widget.value['PhoneNumber'],
+                                style: TextStyle(
+                                    fontSize: 25, fontWeight: FontWeight.bold)),
+                            onTap: () {
+                              final number = widget.value['PhoneNumber'];
+                              launch('tel:$number');
+                            },
+                          ),
                           SizedBox(
                             height: 20,
                           ),
