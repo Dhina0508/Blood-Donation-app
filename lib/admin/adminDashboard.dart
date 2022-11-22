@@ -1,4 +1,5 @@
 import 'package:blood_donation/admin/adminBloodProfile.dart';
+import 'package:blood_donation/auth/signup.dart';
 import 'package:blood_donation/firebase_helper/firebase_helper.dart';
 import 'package:blood_donation/screens/blood/blood_profile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -21,6 +22,15 @@ class _AdminDashboardState extends State<AdminDashboard> {
         actions: [
           IconButton(
               onPressed: () async {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => SignUp()));
+              },
+              icon: Icon(
+                Icons.add,
+                color: Colors.white,
+              )),
+          IconButton(
+              onPressed: () async {
                 service.signOut(context);
                 SharedPreferences pref = await SharedPreferences.getInstance();
                 pref.remove("email");
@@ -28,7 +38,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
               icon: Icon(
                 Icons.logout,
                 color: Colors.white,
-              ))
+              )),
         ],
         title: Text('Welcome Admin'),
         backgroundColor: Colors.red,

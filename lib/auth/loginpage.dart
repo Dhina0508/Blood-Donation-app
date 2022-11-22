@@ -165,7 +165,7 @@ class _LoginPageState extends State<LoginPage> {
                                   MaterialPageRoute(
                                       builder: (context) => AdminDashboard()));
                             }).onError((error, stackTrace) {
-                              service.errorBox(context, e);
+                              service.errorBox(context, "Invalid input");
                             });
                           } else {
                             service.loginUser(
@@ -209,23 +209,23 @@ class _LoginPageState extends State<LoginPage> {
                                       fontSize: 13, color: Colors.black),
                                 ))),
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(left: 10 / 2),
-                        child: Container(
-                            alignment: Alignment.bottomRight,
-                            child: TextButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => SignUp()));
-                                },
-                                child: Text(
-                                  "Don't have an Account?   ",
-                                  style: TextStyle(
-                                      fontSize: 13, color: Colors.black),
-                                ))),
-                      ),
+                      // Padding(
+                      //   padding: EdgeInsets.only(left: 10 / 2),
+                      //   child: Container(
+                      //       alignment: Alignment.bottomRight,
+                      //       child: TextButton(
+                      //           onPressed: () {
+                      //             Navigator.push(
+                      //                 context,
+                      //                 MaterialPageRoute(
+                      //                     builder: (context) => SignUp()));
+                      //           },
+                      //           child: Text(
+                      //             "Don't have an Account?   ",
+                      //             style: TextStyle(
+                      //                 fontSize: 13, color: Colors.black),
+                      //           ))),
+                      // ),
                     ],
                   )
                 ],
