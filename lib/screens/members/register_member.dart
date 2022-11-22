@@ -38,6 +38,9 @@ class _RegisterMembersState extends State<RegisterMembers> {
 
   TextEditingController _BloodController = TextEditingController();
   TextEditingController _dobcontroller = TextEditingController();
+
+  TextEditingController _Areacontroller = TextEditingController();
+
   String? value;
 
   final blood_type = [
@@ -75,6 +78,7 @@ class _RegisterMembersState extends State<RegisterMembers> {
       "Time": DateTime.now(),
       "img": url,
       "id": _CollectionReference.id,
+      "Area": _Areacontroller.text,
     }).then((value) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text("Details Of The Members Has Been Added"),
@@ -93,6 +97,7 @@ class _RegisterMembersState extends State<RegisterMembers> {
 
   @override
   Widget build(BuildContext context) {
+    var enablle = "";
     return Scaffold(
         extendBodyBehindAppBar: true,
         backgroundColor: Colors.redAccent[200],
@@ -334,7 +339,59 @@ class _RegisterMembersState extends State<RegisterMembers> {
                             }
                           },
                           child: Text('   Submit   ')),
+                      const EdgeInsets.only(right: 8, top: 30, left: 8),
+                      child: TextFormField(
+                        controller: _Areacontroller,
+                        decoration: InputDecoration(
+                            labelText: 'Address',
+                            prefixIcon: Icon(
+                              Icons.maps_home_work_rounded,
+                              color: Colors.redAccent[200],
+                              size: 40,
+                            ),
+                            hintText: 'Koyembedu'),
+                      ),
                     ),
+                    Padding(
+                        padding:
+                            const EdgeInsets.only(right: 8, top: 30.0, left: 8),
+                        child: enable == ""
+                            ? ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.red),
+                                onPressed: () {
+                                  if (_NameController.text != "" &&
+                                      _PhoneNoController.text != "" &&
+                                      _Areacontroller.text != "" &&
+                                      _AddressController.text != "" &&
+                                      _sexController.text != "" &&
+                                      (_BloodController.text != "" ||
+                                          value != "") &&
+                                      file != null) {
+                                    setState(() {
+                                      enable = "1";
+                                    });
+                                    if (file == null) {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(SnackBar(
+                                        content: Text(
+                                            "Please Select Your profile Photo"),
+                                        behavior: SnackBarBehavior.floating,
+                                        backgroundColor: Colors.black,
+                                      ));
+                                    }
+                                    SendUserDataToDB();
+                                  } else {
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(SnackBar(
+                                      content: Text(" Details cannot be empty"),
+                                      behavior: SnackBarBehavior.floating,
+                                      backgroundColor: Colors.black,
+                                    ));
+                                  }
+                                },
+                                child: Text('   Submit   '))
+                            : CircularProgressIndicator()),
                   ],
                 ),
               ),

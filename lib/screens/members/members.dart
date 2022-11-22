@@ -13,6 +13,10 @@ class _MembersState extends State<Members_Page> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.value['Name']),
+        backgroundColor: Colors.red,
+      ),
       body: Stack(children: [
         Center(
             child: Image.asset(
@@ -104,6 +108,30 @@ class _MembersState extends State<Members_Page> {
                             height: 10,
                           ),
                           Text(widget.value['PhoneNumber'],
+                              style: TextStyle(
+                                  fontSize: 25, fontWeight: FontWeight.bold)),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Row(
+                            children: [
+                              SizedBox(
+                                width: 15,
+                              ),
+                              Text(
+                                "Sex : ",
+                                style: TextStyle(
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.w500,
+                                    fontFamily: 'JosefinSans',
+                                    color: Colors.brown),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(widget.value['Sex'],
                               style: TextStyle(
                                   fontSize: 25, fontWeight: FontWeight.bold)),
                           SizedBox(

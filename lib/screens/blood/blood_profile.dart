@@ -46,6 +46,7 @@ class _bloodprofState extends State<bloodprof> {
                       gotReqNo: gotUnits,
                       GetingNo: units,
                       id: widget.value['id'],
+                      blood: widget.value['Blood_Group'],
                       val: val,
                     )));
       else {
@@ -199,9 +200,82 @@ class _bloodprofState extends State<bloodprof> {
                           SizedBox(
                             height: 10,
                           ),
-                          Text(widget.value['units'],
-                              style: TextStyle(
-                                  fontSize: 25, fontWeight: FontWeight.bold)),
+                          FirebaseAuth.instance.currentUser?.email !=
+                                  widget.value['email']
+                              ? Text(widget.value['units'],
+                                  style: TextStyle(
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.bold))
+                              : Row(
+                                  children: [
+                                    Spacer(),
+                                    Text(widget.value['units'],
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 25,
+                                            fontWeight: FontWeight.bold)),
+                                    IconButton(
+                                        onPressed: () {
+                                          AcceptEdit(@required id,
+                                              @required units) async {
+                                            final FirebaseAuth _auth =
+                                                FirebaseAuth.instance;
+                                            CollectionReference
+                                                _CollectionReference =
+                                                FirebaseFirestore.instance
+                                                    .collection(
+                                                        "Blood_Wait_list");
+                                          }
+
+                                          TextEditingController _Units =
+                                              TextEditingController();
+                                          showDialog(
+                                              context: context,
+                                              builder: (BuildContext context) {
+                                                return AlertDialog(
+                                                    title: Text(
+                                                        "Enter the no of units"),
+                                                    content: Column(
+                                                      mainAxisSize:
+                                                          MainAxisSize.min,
+                                                      children: [
+                                                        TextField(
+                                                          controller: _Units,
+                                                        ),
+                                                        ElevatedButton(
+                                                            onPressed: () {
+                                                              final docUser = FirebaseFirestore
+                                                                  .instance
+                                                                  .collection(
+                                                                      "Blood_Wait_list")
+                                                                  .doc(widget
+                                                                      .value[
+                                                                          'id']
+                                                                      .toString());
+                                                              docUser.update({
+                                                                "units":
+                                                                    _Units.text
+                                                              });
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .pop();
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .pop();
+                                                            },
+                                                            child:
+                                                                Text('Update'))
+                                                      ],
+                                                    ));
+                                              });
+                                        },
+                                        icon: Icon(
+                                          Icons.edit_rounded,
+                                          color: Colors.green,
+                                        )),
+                                    Spacer()
+                                  ],
+                                ),
                           SizedBox(
                             height: 20,
                           ),
@@ -409,7 +483,9 @@ class _bloodprofState extends State<bloodprof> {
                                                         Text("We have " +
                                                             widget.value[
                                                                 'GotUnits'] +
-                                                            " units."),
+                                                            "/" +
+                                                            widget.value[
+                                                                'units']),
                                                         TextField(
                                                           controller: _Units,
                                                           keyboardType:

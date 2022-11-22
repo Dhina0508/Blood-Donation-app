@@ -1,5 +1,6 @@
 import 'package:blood_donation/screens/members/members.dart';
 import 'package:blood_donation/screens/members/register_member.dart';
+import 'package:blood_donation/screens/members/search.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -17,6 +18,12 @@ class _AddUserState extends State<AddUser> {
       appBar: AppBar(
         title: Text('Members'),
         actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => Search()));
+              },
+              icon: Icon(Icons.search)),
           IconButton(
               onPressed: () {
                 Navigator.push(context,
