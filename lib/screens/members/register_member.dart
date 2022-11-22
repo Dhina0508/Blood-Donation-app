@@ -317,29 +317,7 @@ class _RegisterMembersState extends State<RegisterMembers> {
                     ),
                     Padding(
                       padding:
-                          const EdgeInsets.only(right: 8, top: 30.0, left: 8),
-                      child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.red),
-                          onPressed: () {
-                            if (_NameController.text != "" &&
-                                _PhoneNoController.text != "" &&
-                                _AddressController.text != "" &&
-                                _sexController.text != "" &&
-                                (_BloodController.text != "" || value != "") &&
-                                file != null) {
-                              SendUserDataToDB();
-                            } else {
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(SnackBar(
-                                content: Text(" Details cannot be empty"),
-                                behavior: SnackBarBehavior.floating,
-                                backgroundColor: Colors.black,
-                              ));
-                            }
-                          },
-                          child: Text('   Submit   ')),
-                      const EdgeInsets.only(right: 8, top: 30, left: 8),
+                          const EdgeInsets.only(right: 8, top: 30, left: 8),
                       child: TextFormField(
                         controller: _Areacontroller,
                         decoration: InputDecoration(
