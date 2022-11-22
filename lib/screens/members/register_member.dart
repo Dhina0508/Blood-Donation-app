@@ -79,6 +79,8 @@ class _RegisterMembersState extends State<RegisterMembers> {
       "img": url,
       "id": _CollectionReference.id,
       "Area": _Areacontroller.text,
+      "Status": "Not_Donated",
+      "admin": FirebaseAuth.instance.currentUser!.email.toString(),
     }).then((value) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text("Details Of The Members Has Been Added"),

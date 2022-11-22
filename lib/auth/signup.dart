@@ -205,14 +205,14 @@ class _SignUpState extends State<SignUp> {
                       }
                     },
                     child: Text('   Register   ')),
-                TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => LoginPage()));
-                    },
-                    child: Text('Have an account?',
-                        style: TextStyle(fontSize: 13, color: Colors.white)))
+                // TextButton(
+                //     onPressed: () {
+                //       Navigator.of(context).pop();
+                //       Navigator.push(context,
+                //           MaterialPageRoute(builder: (context) => LoginPage()));
+                //     },
+                //     child: Text('Have an account?',
+                //         style: TextStyle(fontSize: 13, color: Colors.white)))
               ],
             )),
           ),

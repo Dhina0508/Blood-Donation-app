@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
 
 class Member_Donor extends StatefulWidget {
   var email;
@@ -40,6 +42,15 @@ class _Member_DonorState extends State<Member_Donor> {
     });
   }
 
+  AcceptRequest(@required id) async {
+    CollectionReference _CollectionReference =
+        FirebaseFirestore.instance.collection("Members_Details");
+    return _CollectionReference.doc(id)
+        .update({"Status": "Donated"}).then((value) {
+      Navigator.of(context).pop();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,7 +79,10 @@ class _Member_DonorState extends State<Member_Donor> {
                       itemBuilder: (context, i) {
                         QueryDocumentSnapshot x = snapshot.data!.docs[i];
                         print(widget.blood);
-                        if (widget.blood == x['Blood']) {
+                        if (widget.blood == x['Blood'] &&
+                            // x['admin'] ==
+                            //     FirebaseAuth.instance.currentUser!.email &&
+                            x['Status'] == "Not_Donated") {
                           return Card(
                             elevation: 5,
                             child: ListTile(
@@ -119,6 +133,7 @@ class _Member_DonorState extends State<Member_Donor> {
                                             setState(() {
                                               gotNo = gotNo + 1;
                                             });
+                                            AcceptRequest(x['id']);
                                           });
                                           if (widget.GetingNo == 0) {
                                             if (widget.gotReqNo ==
@@ -126,7 +141,6 @@ class _Member_DonorState extends State<Member_Donor> {
                                               DeleteRequest(widget.id);
                                             }
 
-                                            Navigator.of(context).pop();
                                             Navigator.of(context).pop();
                                             Navigator.of(context).pop();
                                             Navigator.of(context).pop();
