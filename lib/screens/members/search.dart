@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -48,20 +50,26 @@ class _SearchState extends State<Search> {
                         return ListView.builder(
                             itemCount: snapshot.data?.docs.length,
                             itemBuilder: (context, index) {
-                              String ItemTitle =
-                                  snapshot.data?.docs[index]['Name'];
-                              String image = snapshot.data?.docs[index]['img'];
-                              String Group =
-                                  snapshot.data?.docs[index]['Blood'];
-                              String Area = snapshot.data?.docs[index]['Area'];
-                              String Phno =
-                                  snapshot.data?.docs[index]['PhoneNumber'];
-                              return CardItem(
-                                ItemTitle: ItemTitle,
-                                image: image,
-                                group: Group,
-                                Area: Area,
-                              );
+                              if (snapshot.data?.docs[index]['admin'] ==
+                                  FirebaseAuth.instance.currentUser!.email) {
+                                String ItemTitle =
+                                    snapshot.data?.docs[index]['Name'];
+                                String image =
+                                    snapshot.data?.docs[index]['img'];
+                                String Group =
+                                    snapshot.data?.docs[index]['Blood'];
+                                String Area =
+                                    snapshot.data?.docs[index]['Area'];
+                                String Phno =
+                                    snapshot.data?.docs[index]['PhoneNumber'];
+                                return CardItem(
+                                  ItemTitle: ItemTitle,
+                                  image: image,
+                                  group: Group,
+                                  Area: Area,
+                                );
+                              }
+                              return Container();
                             });
                       }))
             ],

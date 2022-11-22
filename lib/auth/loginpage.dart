@@ -1,8 +1,12 @@
+import 'dart:math';
+
 import 'package:blood_donation/admin/adminDashboard.dart';
 import 'package:blood_donation/auth/forget_password/get_email.dart';
 import 'package:blood_donation/auth/phone_number_verification.dart';
 import 'package:blood_donation/auth/register.dart';
 import 'package:blood_donation/auth/signup.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
@@ -151,10 +155,18 @@ class _LoginPageState extends State<LoginPage> {
                         if (emailcontroller.text.isNotEmpty &&
                             passwordcontroller.text.isNotEmpty) {
                           if (emailcontroller.text == adminLog) {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => AdminDashboard()));
+                            FirebaseAuth.instance
+                                .signInWithEmailAndPassword(
+                                    email: adminLog,
+                                    password: passwordcontroller.text)
+                                .then((value) {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => AdminDashboard()));
+                            }).onError((error, stackTrace) {
+                              service.errorBox(context, e);
+                            });
                           } else {
                             service.loginUser(
                                 context,

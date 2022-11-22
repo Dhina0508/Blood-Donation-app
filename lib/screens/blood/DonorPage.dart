@@ -1,4 +1,5 @@
 import 'package:blood_donation/screens/blood/MemberDonor.dart';
+import 'package:blood_donation/screens/blood/OtherDonor.dart';
 import 'package:blood_donation/screens/blood/blood.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -50,6 +51,7 @@ class _DonorPageState extends State<DonorPage> {
 
   @override
   Widget build(BuildContext context) {
+    var tap = "";
     final FirebaseAuth _auth = FirebaseAuth.instance;
     CollectionReference _CollectionReference =
         FirebaseFirestore.instance.collection("Blood_Wait_list");
@@ -59,49 +61,51 @@ class _DonorPageState extends State<DonorPage> {
         title: Text("Donor Details"),
         backgroundColor: Colors.red,
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 25,
-                  ),
-                  ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: ((context) => Member_Donor(
-                                      GetingNo: widget.GetingNo,
-                                      UnitNo: widget.UnitNo,
-                                      email: widget.email,
-                                      gotReqNo: widget.gotReqNo,
-                                      id: widget.id,
-                                      val: widget.val,
-                                      blood: widget.blood,
-                                    ))));
-                      },
-                      child: Text('Donate From our Members')),
-                  for (int i = widget.gotReqNo, v = widget.gotReqNo;
-                      i <= (widget.GetingNo - 1) + widget.gotReqNo;
-                      i++)
-                    post(
-                      GetingNo: widget.GetingNo,
-                      UnitNo: widget.UnitNo,
-                      email: widget.email,
-                      gotReqNo: widget.gotReqNo,
-                      id: widget.id,
-                      val: widget.val,
-                      i: i,
-                    )
-                ],
-              ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            alignment: Alignment.center,
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 25,
+                ),
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: ((context) => Member_Donor(
+                                    GetingNo: widget.GetingNo,
+                                    UnitNo: widget.UnitNo,
+                                    email: widget.email,
+                                    gotReqNo: widget.gotReqNo,
+                                    id: widget.id,
+                                    val: widget.val,
+                                    blood: widget.blood,
+                                  ))));
+                    },
+                    child: Text('Donate From our Members')),
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => OtherDonor(
+                                    GetingNo: widget.GetingNo,
+                                    UnitNo: widget.UnitNo,
+                                    email: widget.email,
+                                    gotReqNo: widget.gotReqNo,
+                                    id: widget.id,
+                                    val: widget.val,
+                                  )));
+                    },
+                    child: Text("Donate from other members")),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -231,6 +235,7 @@ class _MyWidgetState extends State<post> {
                           backgroundColor: Colors.blueGrey,
                           textColor: Colors.white,
                           fontSize: 16.0);
+                      Navigator.of(context).pop();
                       Navigator.of(context).pop();
                       Navigator.of(context).pop();
                       Navigator.of(context).pop();
