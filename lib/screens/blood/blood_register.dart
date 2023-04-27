@@ -109,6 +109,7 @@ class _registerState extends State<bloodreg> {
     "O +ve",
     "O -ve",
     "A +ve",
+    "A -ve",
     "A1 +ve",
     "B +ve",
     "B -ve",
@@ -211,7 +212,7 @@ class _registerState extends State<bloodreg> {
                                 hint: Text(
                                   'Select Blood Group',
                                   style: TextStyle(
-                                      fontSize: 17, color: Colors.grey),
+                                      fontSize: 15, color: Colors.grey),
                                 ),
                                 value: value,
                                 style: TextStyle(color: Colors.black),
@@ -271,7 +272,7 @@ class _registerState extends State<bloodreg> {
                                 hint: Text(
                                   'Select Number of Units Needed',
                                   style: TextStyle(
-                                      fontSize: 17, color: Colors.grey),
+                                      fontSize: 15, color: Colors.grey),
                                 ),
                                 value: req_units,
                                 style: TextStyle(color: Colors.black),
